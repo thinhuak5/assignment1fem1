@@ -1,0 +1,62 @@
+<div class="app-topstrip bg-dark text-white p-y-10 p-x-20 w-100 d-lg-flex align-items-center justify-content-between">
+    <h2 class="f-s-18 m-y-8 text-lg-left text-center"></h2>
+
+    <div class="d-flex align-items-center justify-content-center flex-wrap">
+        <mat-menu #beforeMenu="matMenu" xPosition="before">
+            <a mat-menu-item href="https://www.wrappixel.com/templates/flexy-material-angular-admin/?ref=353"
+                target="_blank">
+                <div class="d-flex align-items-center gap-4">
+                    <i-tabler name="external-link" class="icon-18 d-flex"></i-tabler>
+                    Angular Preview
+                </div>
+            </a>
+            <a mat-menu-item href="https://www.wrappixel.com/templates/flexy-vuetify-dashboard/?ref=353" target="_blank">
+                <div class="d-flex align-items-center gap-4">
+                    <i-tabler name="external-link" class="icon-18 d-flex"></i-tabler>
+                    VueJs Preview
+                </div>
+            </a>
+            <a mat-menu-item href="https://www.wrappixel.com/templates/flexy-nextjs-dashboard-material-ui/?ref=353" target="_blank">
+                <div class="d-flex align-items-center gap-4">
+                    <i-tabler name="external-link" class="icon-18 d-flex"></i-tabler>
+                    NextJs Preview
+                </div>
+            </a>
+            <a mat-menu-item href="https://www.wrappixel.com/templates/flexy-react-material-dashboard-admin/?ref=353" target="_blank">
+                <div class="d-flex align-items-center gap-4">
+                    <i-tabler name="external-link" class="icon-18 d-flex"></i-tabler>
+                    React Preview
+                </div>
+            </a>
+            <a mat-menu-item href="https://www.wrappixel.com/templates/flexy-bootstrap-admin-template/?ref=353" target="_blank">
+                <div class="d-flex align-items-center gap-4">
+                    <i-tabler name="external-link" class="icon-18 d-flex"></i-tabler>
+                    Bootstrap Preview
+                </div>
+            </a>
+        </mat-menu>
+
+        <button mat-mini-fab [matMenuTriggerFor]="profilemenu" aria-label="Notifications">
+            <img src="/assets/images/profile/user-1.jpg" class="rounded-circle object-cover d-block" width="35" />
+          </button>
+          <mat-menu #profilemenu="matMenu" class="cardWithShadow topbar-dd">
+            <button mat-menu-item>
+              <mat-icon class="d-flex align-items-center"><i-tabler name="user" class="icon-18 d-flex"></i-tabler></mat-icon>My
+              Profile
+            </button>
+            <button mat-menu-item>
+              <mat-icon class="d-flex align-items-center"><i-tabler name="mail" class="icon-18 d-flex"></i-tabler></mat-icon>My
+              Account
+            </button>
+            <button mat-menu-item>
+              <mat-icon class="d-flex align-items-center"><i-tabler name="list-check"
+                  class="icon-18 d-flex"></i-tabler></mat-icon>My Task
+            </button>
+        
+            <div class="p-x-12 m-t-12">
+              <a [routerLink]="['/authentication/login']" mat-stroked-button class="w-100">Logout</a>
+            </div>
+          </mat-menu>
+
+    </div>
+</div>
