@@ -1,4 +1,4 @@
-import { NavItem } from './nav-item/nav-item';
+import {NavItem} from './nav-item/nav-item';
 
 export const navItems: NavItem[] = [
   {
@@ -23,7 +23,6 @@ export const navItems: NavItem[] = [
     route: '/ui-components/category',
   },
   {
-    navCap: 'Người dùng',
     displayName: 'Khach hang',
     iconName: 'users',
     route: '/ui-components/user',

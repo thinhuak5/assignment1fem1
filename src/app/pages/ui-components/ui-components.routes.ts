@@ -1,4 +1,4 @@
-import { Routes } from '@angular/router';
+import {Routes} from '@angular/router';
 
 // ui
 import {AppChipsComponent} from './chips/chips.component';
