@@ -1,39 +1,74 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
+import {CommonModule} from '@angular/common';
 import {MatTableModule} from '@angular/material/table';
-import { MatCardModule } from '@angular/material/card';
-import { MaterialModule } from 'src/app/material.module';
-import { MatIconModule } from '@angular/material/icon';
-import { MatMenuModule } from '@angular/material/menu';
-import { MatButtonModule } from '@angular/material/button';
+import {MatCardModule} from '@angular/material/card';
+import {MaterialModule} from 'src/app/material.module';
+import {MatIconModule} from '@angular/material/icon';
+import {MatMenuModule} from '@angular/material/menu';
+import {MatButtonModule} from '@angular/material/button';
+import {RouterModule} from '@angular/router';
 
 export interface PeriodicElement {
+  id: number;
   name: string;
-  position: number;
-  weight: number;
-  symbol: string;
+  description: string;
+  images: string;
+  status: number;
 }
 
+
 const ELEMENT_DATA: PeriodicElement[] = [
-  {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
-  {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
-  {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li'},
-  {position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be'},
-  {position: 5, name: 'Boron', weight: 10.811, symbol: 'B'},
-  {position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C'},
-  {position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N'},
-  {position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O'},
-  {position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F'},
-  {position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne'},
+  {
+    id: 1,
+    name: ' Anime/Manga',
+    description: 'Gundam, One Piece, Dragon Ball, Naruto, Attack on Titan…',
+    images: 'assets/images/products/anime.jpg',
+    status: 1
+  },
+  {
+    id: 2,
+    name: ' Phim ảnh',
+    description: 'Marvel, DC, Star Wars, Harry Potter…',
+    images: 'assets/images/products/anime.jpg',
+    status: 1
+  },
+  {
+    id: 3,
+    name: 'Game',
+    description: 'Genshin Impact,Honkai Star rail,Wuthering waves,...',
+    images: 'assets/images/products/anime.jpg',
+    status: 1
+  },
+  {
+    id: 4,
+    name: 'Thể thao',
+    description: 'Mô hình cầu thủ bóng đá, vận động viên thể thao',
+    images: 'assets/images/products/anime.jpg',
+    status: 1
+  },
+  {
+    id: 5,
+    name: 'Thần thoại/Fantasy',
+    description: 'Nhân vật thần thoại, quái vật, siêu nhân…',
+    images: 'assets/images/products/anime.jpg',
+    status: 0
+  }
 ];
 
 
 @Component({
   selector: 'app-category',
-  imports: [MatTableModule, MatCardModule, MaterialModule, MatIconModule, MatMenuModule, MatButtonModule],
+  imports: [MatTableModule,
+    MatCardModule,
+    MaterialModule,
+    MatIconModule,
+    MatMenuModule,
+    MatButtonModule,
+    CommonModule,
+    RouterModule],
   templateUrl: './category.component.html',
-  styleUrl: './category.component.scss'
 })
 export class CategoryComponent {
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
+  displayedColumns: string[] = ['id', 'images', 'name', 'description', 'status', 'actions'];
   dataSource = ELEMENT_DATA;
 }
