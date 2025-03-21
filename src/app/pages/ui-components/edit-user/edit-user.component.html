@@ -1,0 +1,55 @@
+<mat-card class="cardWithShadow">
+  <mat-card-title>Chỉnh Sửa Tài Khoản</mat-card-title>
+  <mat-card-content>
+    <form>
+      <mat-form-field class="w-100">
+        <mat-label>Họ và Tên</mat-label>
+        <input matInput value="Nguyễn Văn A"
+
+
+        >
+      </mat-form-field>
+
+      <mat-form-field class="w-100">
+        <mat-label>Email</mat-label>
+        <input matInput value="nguyenvana@example.com"
+
+
+        >
+      </mat-form-field>
+
+      <mat-form-field class="w-100">
+        <mat-label>Số Điện Thoại</mat-label>
+        <input matInput value="0987654321"
+
+
+        >
+      </mat-form-field>
+
+      <mat-form-field class="w-100">
+        <mat-label>Địa Chỉ</mat-label>
+        <input matInput value="Hà Nội"
+
+
+        >
+      </mat-form-field>
+
+      <mat-form-field class="w-100">
+        <mat-label>Mật Khẩu</mat-label>
+        <input matInput value="123456" type="password"
+
+
+        >
+      </mat-form-field>
+
+      <div class="d-flex justify-content-between" [routerLink]="['/ui-components/user']">
+        <button mat-raised-button color="warn">
+          Hủy
+        </button>
+        <button mat-raised-button color="primary">
+          Lưu Thay Đổi
+        </button>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>
