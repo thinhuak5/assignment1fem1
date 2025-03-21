@@ -14,7 +14,7 @@
               <button mat-stroked-button class="w-100">
                 <div class="d-flex align-items-center">
                   <img src="/assets/images/svgs/google-icon.svg" alt="google" width="16" class="m-r-8" />
-                  Sign in with Google
+                  Đăng nhập Google
                 </div>
               </button>
             </div>
@@ -22,38 +22,38 @@
               <button mat-stroked-button class="w-100 d-flex align-items-center">
                 <div class="d-flex align-items-center">
                   <img src="/assets/images/svgs/facebook-icon.svg" alt="facebook" width="40" class="m-r-4" />
-                  Sign in with FB
+                  Đăng nhập Facebook
                 </div>
               </button>
             </div>
           </div>
 
-          <div class="or-border m-t-30">or sign up with</div>
+          <div class="or-border m-t-30">Hoặc đăng nhập bằng</div>
 
           <form class="m-t-30">
-            <mat-label class="f-s-14 f-w-600 m-b-12 d-block">Name</mat-label>
+            <mat-label class="f-s-14 f-w-600 m-b-12 d-block">Tên</mat-label>
             <mat-form-field appearance="outline" class="w-100" color="primary">
               <input matInput />
             </mat-form-field>
-            <mat-label class="f-s-14 f-w-600 m-b-12 d-block">Email Adddress</mat-label>
+            <mat-label class="f-s-14 f-w-600 m-b-12 d-block">Email</mat-label>
             <mat-form-field appearance="outline" class="w-100" color="primary">
               <input matInput type="email" />
             </mat-form-field>
             <!-- password -->
-            <mat-label class="f-s-14 f-w-600 m-b-12 d-block">Password</mat-label>
+            <mat-label class="f-s-14 f-w-600 m-b-12 d-block">Mật Khẩu</mat-label>
             <mat-form-field appearance="outline" class="w-100" color="primary">
               <input matInput type="password" />
             </mat-form-field>
 
             <a [routerLink]="['/']" mat-flat-button color="primary" class="w-100">
-              Sign Up
+              Đăng ký
             </a>
             <!-- input -->
           </form>
-          <span class="d-block f-w-500 text-center m-t-24">Already have an Account?
+          <span class="d-block f-w-500 text-center m-t-24">Đã có tài khoản?
 
             <a [routerLink]="['/authentication/login']" class="text-decoration-none text-primary f-w-500 f-s-14">
-              Sign In</a>
+              Đăng nhập</a>
           </span>
         </mat-card-content>
       </mat-card>
