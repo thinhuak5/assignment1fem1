@@ -23,6 +23,11 @@ export const navItems: NavItem[] = [
     route: '/ui-components/category',
   },
   {
+    displayName: 'Binh Luan',
+    iconName: 'table',
+    route: '/ui-components/comment',
+  },
+  {
     displayName: 'Khach hang',
     iconName: 'users',
     route: '/ui-components/user',
