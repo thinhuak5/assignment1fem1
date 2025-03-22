@@ -1,4 +1,4 @@
-      import { NavItem } from './nav-item/nav-item';
+import {NavItem} from './nav-item/nav-item';
 
 export const navItems: NavItem[] = [
   {
@@ -33,9 +33,9 @@ export const navItems: NavItem[] = [
     route: '/ui-components/tables',
   },
   {
-    displayName: 'Category',
+    displayName: 'Binh Luan',
     iconName: 'table',
-    route: '/ui-components/category',
+    route: '/ui-components/comment',
   },
   {
     navCap: 'Auth',

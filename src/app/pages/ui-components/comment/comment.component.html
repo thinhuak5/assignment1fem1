@@ -1,0 +1,79 @@
+<mat-card class="cardWithShadow p-3 shadow-sm rounded">
+  <mat-card-content>
+    <mat-card-title class="mb-3 text-primary">📊 Bảng Dữ Liệu</mat-card-title>
+
+    <div class="row">
+      <div class="col-12">
+        <div class="table-responsive">
+          <table mat-table [dataSource]="dataSource" class="table table-bordered table-hover align-middle">
+
+            <!-- Cột STT -->
+            <ng-container matColumnDef="position">
+              <th mat-header-cell *matHeaderCellDef class="text-center bg-primary text-white">#</th>
+              <td mat-cell *matCellDef="let element" class="text-center">{{ element.position }}</td>
+            </ng-container>
+
+            <!-- Cột Tên -->
+            <ng-container matColumnDef="name">
+              <th mat-header-cell *matHeaderCellDef class="bg-primary text-white">Tên</th>
+              <td mat-cell *matCellDef="let element">
+                <div class="input-container">
+                  <input *ngIf="element.isEditing" [(ngModel)]="element.name"
+                         class="form-control form-control-lg border-primary"/>
+                  <span *ngIf="!element.isEditing">{{ element.name }}</span>
+                </div>
+              </td>
+            </ng-container>
+
+            <!-- Cột Bình luận -->
+            <ng-container matColumnDef="weight">
+              <th mat-header-cell *matHeaderCellDef class="bg-primary text-white">Bình luận</th>
+              <td mat-cell *matCellDef="let element">
+                <div class="input-container">
+                  <textarea *ngIf="element.isEditing" [(ngModel)]="element.weight"
+                            class="form-control form-control-lg border-primary"></textarea>
+                  <span *ngIf="!element.isEditing">{{ element.weight }}</span>
+                </div>
+              </td>
+            </ng-container>
+
+            <!-- Cột Trạng thái -->
+            <ng-container matColumnDef="symbol">
+              <th mat-header-cell *matHeaderCellDef class="bg-primary text-white">Trạng thái</th>
+              <td mat-cell *matCellDef="let element">
+                <div class="input-container">
+                  <select *ngIf="element.isEditing" [(ngModel)]="element.symbol"
+                          class="form-select form-select-lg border-primary">
+                    <option value="Hiện">Hiện</option>
+                    <option value="Ẩn">Ẩn</option>
+                  </select>
+                  <span *ngIf="!element.isEditing">
+                    <span class="badge" [ngClass]="element.symbol === 'Hiện' ? 'badge-success' : 'badge-secondary'">
+                      {{ element.symbol }}
+                    </span>
+                  </span>
+                </div>
+              </td>
+            </ng-container>
+
+            <!-- Cột Hành động -->
+            <ng-container matColumnDef="actions">
+              <th mat-header-cell *matHeaderCellDef class="text-center bg-primary text-white">Hành động</th>
+              <td mat-cell *matCellDef="let element" class="text-center">
+                <button mat-icon-button (click)="toggleEdit(element)" class="btn btn-lg btn-outline-primary me-2">
+                  <mat-icon>{{ element.isEditing ? 'save' : 'edit' }}</mat-icon>
+                </button>
+                <button mat-icon-button (click)="deleteElement(element)" class="btn btn-lg btn-outline-danger">
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns" class="table-dark"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>
