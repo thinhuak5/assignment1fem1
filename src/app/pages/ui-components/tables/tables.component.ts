@@ -1,11 +1,13 @@
-import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
-import { MatCardModule } from '@angular/material/card';
-import { MatTableModule } from '@angular/material/table';
-import { MaterialModule } from 'src/app/material.module';
-import { MatIconModule } from '@angular/material/icon';
-import { MatMenuModule } from '@angular/material/menu';
-import { MatButtonModule } from '@angular/material/button';
+import {CommonModule} from '@angular/common';
+import {Component} from '@angular/core';
+import {MatCardModule} from '@angular/material/card';
+import {MatTableModule} from '@angular/material/table';
+import {MaterialModule} from 'src/app/material.module';
+import {MatIconModule} from '@angular/material/icon';
+import {MatMenuModule} from '@angular/material/menu';
+import {MatButtonModule} from '@angular/material/button';
+import {RouterModule} from '@angular/router';
+import {MatSelectModule} from '@angular/material/select';
 
 // table 1
 export interface productsData {
@@ -19,31 +21,38 @@ export interface productsData {
 const PRODUCT_DATA: productsData[] = [
   {
     id: 1,
-    imagePath: 'assets/images/products/product-1.png',
-    uname: 'iPhone 13 pro max-Pacific Blue-128GB storage',
-    budget: 180,
-    priority: 'confirmed',
+    imagePath: 'assets/images/products/phapsutientang-tap12.jpg',
+    uname: 'Pháp sư tiễn táng - Tập 12',
+    budget: 6,
+    priority: 'Thanhh toán đày đủ',
   },
   {
     id: 2,
-    imagePath: 'assets/images/products/product-2.png',
-    uname: 'Apple MacBook Pro 13 inch-M1-8/256GB-space',
-    budget: 90,
-    priority: 'cancelled',
+    imagePath: 'assets/images/products/WindBreaker-tap2.jpg',
+    uname: 'Wind Breaker - Tập 2',
+    budget: 4,
+    priority: 'Đã hủy',
   },
   {
     id: 3,
-    imagePath: 'assets/images/products/product-3.png',
-    uname: 'PlayStation 5 DualSense Wireless Controller',
-    budget: 120,
-    priority: 'rejected',
+    imagePath: 'assets/images/products/attackontitan-tap9.jpg',
+    uname: 'Attack On Titan - Tập 9',
+    budget: 6,
+    priority: 'Trả một phần',
   },
   {
     id: 4,
-    imagePath: 'assets/images/products/product-4.png',
-    uname: 'Amazon Basics Mesh, Mid-Back, Swivel Office',
-    budget: 160,
-    priority: 'confirmed',
+    imagePath: 'assets/images/products/nghethuatdamphan.jpg',
+    uname: 'Nghệ thuật đàm phán',
+    budget: 10,
+    priority: 'Thanhh toán đày đủ',
+  },
+  {
+    id: 5,
+    imagePath: 'assets/images/products/lythuyettrochoi.jpg',
+    uname: 'Lý thuyết trò chơi',
+    budget: 8,
+    priority: 'Thanhh toán đày đủ',
   },
 ];
 
@@ -57,6 +66,8 @@ const PRODUCT_DATA: productsData[] = [
     MatIconModule,
     MatMenuModule,
     MatButtonModule,
+    RouterModule,
+    MatSelectModule
   ],
   templateUrl: './tables.component.html',
 })
