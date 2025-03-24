@@ -1,0 +1,41 @@
+<mat-card class="p-4">
+  <br>
+  <h2 class="mb-4">Thêm sản phẩm</h2><br><br>
+
+  <form>
+    <!-- Tên sản phẩm -->
+    <mat-form-field appearance="outline" class="w-100 mb-4">
+      <mat-label>Tên sản phẩm</mat-label>
+      <input matInput placeholder="Nhập tên sản phẩm" name="name"/>
+    </mat-form-field>
+
+    <!-- Giá -->
+    <mat-form-field appearance="outline" class="w-100 mb-4">
+      <mat-label>Giá</mat-label>
+      <input matInput type="number" placeholder="Nhập giá" name="price"/>
+    </mat-form-field>
+
+    <!-- Ảnh -->
+    <mat-form-field appearance="outline" class="w-100 mb-4">
+      <mat-label>Ảnh sản phẩm</mat-label>
+      <input matInput placeholder="URL ảnh hoặc chọn file" name="image"/>
+    </mat-form-field>
+
+    <!-- Trạng thái thanh toán -->
+    <mat-form-field appearance="outline" class="w-100 mb-4">
+      <mat-label>Trạng thái thanh toán</mat-label>
+      <mat-select name="paymentStatus">
+        <mat-option value="cancelled">Đã hủy</mat-option>
+        <mat-option value="partial">Trả một phần</mat-option>
+        <mat-option value="paid">Thanh toán đầy đủ</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" type="button">
+      Thêm sản phẩm
+    </button>
+    <button mat-stroked-button color="primary" type="button" [routerLink]="['/ui-components/tables']">
+      Quay lại
+    </button>
+  </form>
+</mat-card>

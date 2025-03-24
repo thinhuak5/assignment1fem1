@@ -11,6 +11,8 @@ import {UserComponent} from './user/user.component';
 import {AddUserComponent} from "./add-user/add-user.component";
 import {EditUserComponent} from "./edit-user/edit-user.component";
 import {CommentComponent} from './comment/comment.component'
+import {AddProductComponent} from './add-product/add-product.component';
+import {EditProductComponent} from './edit-product/edit-product.component';
 
 export const UiComponentsRoutes: Routes = [
   {
@@ -55,6 +57,14 @@ export const UiComponentsRoutes: Routes = [
       {
         path: 'comment',
         component: CommentComponent,
+      },
+      {
+        path: 'add-product',
+        component: AddProductComponent,
+      },
+      {
+        path: 'edit-product',
+        component: EditProductComponent,
       },
     ],
   },
