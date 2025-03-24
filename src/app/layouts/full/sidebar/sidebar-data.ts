@@ -18,6 +18,11 @@ export const navItems: NavItem[] = [
     route: '/ui-components/tables',
   },
   {
+    displayName: 'Order',
+    iconName: 'shopping-cart',
+    route: '/ui-components/order',
+  },
+  {
     displayName: 'Danh Mục',
     iconName: 'table',
     route: '/ui-components/category',

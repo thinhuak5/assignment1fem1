@@ -13,6 +13,8 @@ import {EditUserComponent} from "./edit-user/edit-user.component";
 import {CommentComponent} from './comment/comment.component'
 import {AddProductComponent} from './add-product/add-product.component';
 import {EditProductComponent} from './edit-product/edit-product.component';
+import {AppOrdersComponent} from './order/order.component'; // Thêm component đơn hàng
+import {EditOrderComponent} from './edit-order/edit-order.component'; // Giả định component thêm đơn hàng
 
 export const UiComponentsRoutes: Routes = [
   {
@@ -33,6 +35,14 @@ export const UiComponentsRoutes: Routes = [
       {
         path: 'tables',
         component: AppTablesComponent,
+      },
+      {
+        path: 'order',
+        component: AppOrdersComponent, // Thêm tuyến đường cho danh sách đơn hàng
+      },
+      {
+        path: 'edit-order',
+        component: EditOrderComponent, // Thêm tuyến đường cho sửa đơn hàng
       },
       {
         path: 'category',
@@ -66,6 +76,7 @@ export const UiComponentsRoutes: Routes = [
         path: 'edit-product',
         component: EditProductComponent,
       },
+
     ],
   },
 ];

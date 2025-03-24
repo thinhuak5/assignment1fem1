@@ -1,0 +1,88 @@
+<mat-card class="cardWithShadow">
+  <mat-card-content>
+    <mat-card-title>Danh sách đơn hàng</mat-card-title>
+
+    <div class="table-responsive">
+      <table mat-table [dataSource]="dataSource" class="w-100">
+        <!-- STT Column -->
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef class="f-w-600 f-s-14">STT</th>
+          <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+        </ng-container>
+
+        <!-- Ảnh Column -->
+        <ng-container matColumnDef="image">
+          <th mat-header-cell *matHeaderCellDef class="f-w-600 f-s-14">Ảnh</th>
+          <td mat-cell *matCellDef="let element">
+            <img [src]="element.imagePath" alt="order" width="60" class="rounded"/>
+          </td>
+        </ng-container>
+
+        <!-- Tên Column -->
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef class="f-w-600 f-s-14">Tên</th>
+          <td mat-cell *matCellDef="let element">
+            <h6 class="f-s-14 f-w-600">{{ element.name }}</h6>
+          </td>
+        </ng-container>
+
+        <!-- Số lượng Column -->
+        <ng-container matColumnDef="quantity">
+          <th mat-header-cell *matHeaderCellDef class="f-w-600 f-s-14">Số lượng</th>
+          <td mat-cell *matCellDef="let element">{{ element.quantity }}</td>
+        </ng-container>
+
+        <!-- Giá Column -->
+        <ng-container matColumnDef="price">
+          <th mat-header-cell *matHeaderCellDef class="f-w-600 f-s-14">Giá</th>
+          <td mat-cell *matCellDef="let element">${{ element.price }}</td>
+        </ng-container>
+
+        <!-- Trạng thái Column -->
+        <ng-container matColumnDef="status">
+          <th mat-header-cell *matHeaderCellDef class="f-w-600 f-s-14">Trạng thái</th>
+          <td mat-cell *matCellDef="let element">
+            @if (element.status == 'Đã giao') {
+              <span class="bg-light-success text-success rounded f-w-600 p-6 p-y-4 f-s-12">
+                  {{ element.status | titlecase }}
+                </span>
+            } @else if (element.status == 'Đang xử lý') {
+              <span class="bg-light-warning text-warning rounded f-w-600 p-6 p-y-4 f-s-12">
+                  {{ element.status | titlecase }}
+                </span>
+            } @else if (element.status == 'Đã hủy') {
+              <span class="bg-light-error text-error rounded f-w-600 p-6 p-y-4 f-s-12">
+                  {{ element.status | titlecase }}
+                </span>
+            }
+          </td>
+        </ng-container>
+
+        <!-- Chức năng Column -->
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef class="f-w-600 f-s-14">Chức năng
+
+          </th>
+          <td mat-cell *matCellDef="let element">
+            <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Menu actions">
+              <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item [routerLink]="['/ui-components/edit-order']">
+                <mat-icon>edit</mat-icon>
+                <span>Sửa</span>
+              </button>
+              <button mat-menu-item>
+                <mat-icon>delete</mat-icon>
+                <span>Xóa</span>
+              </button>
+            </mat-menu>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </table>
+    </div>
+  </mat-card-content>
+</mat-card>

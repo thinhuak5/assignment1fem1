@@ -1,0 +1,53 @@
+<mat-card class="cardWithShadow">
+  <mat-card-content>
+    <mat-card-title>Sửa đơn hàng</mat-card-title>
+
+    <form>
+      <!-- ID (chỉ hiển thị, không sửa) -->
+      <mat-form-field appearance="outline" class="w-100">
+        <mat-label>ID</mat-label>
+        <input matInput [(ngModel)]="order.id" name="id" readonly>
+      </mat-form-field>
+
+      <!-- Ảnh -->
+      <mat-form-field appearance="outline" class="w-100">
+        <mat-label>Đường dẫn ảnh</mat-label>
+        <input matInput [(ngModel)]="order.imagePath" name="imagePath" placeholder="Nhập đường dẫn ảnh">
+      </mat-form-field>
+
+      <!-- Tên -->
+      <mat-form-field appearance="outline" class="w-100">
+        <mat-label>Tên sản phẩm</mat-label>
+        <input matInput [(ngModel)]="order.name" name="name" placeholder="Nhập tên sản phẩm" required>
+      </mat-form-field>
+
+      <!-- Số lượng -->
+      <mat-form-field appearance="outline" class="w-100">
+        <mat-label>Số lượng</mat-label>
+        <input matInput type="number" [(ngModel)]="order.quantity" name="quantity" min="1" required>
+      </mat-form-field>
+
+      <!-- Giá -->
+      <mat-form-field appearance="outline" class="w-100">
+        <mat-label>Giá ($)</mat-label>
+        <input matInput type="number" [(ngModel)]="order.price" name="price" min="0" step="0.01" required>
+      </mat-form-field>
+
+      <!-- Trạng thái -->
+      <mat-form-field appearance="outline" class="w-100">
+        <mat-label>Trạng thái</mat-label>
+        <mat-select [(ngModel)]="order.status" name="status" required>
+          <mat-option *ngFor="let status of statuses" [value]="status">
+            {{ status }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <!-- Nút hành động -->
+      <div class="d-flex justify-content-end gap-16">
+        <button mat-raised-button color="primary" (click)="saveOrder()">Lưu</button>
+        <button mat-raised-button color="warn" (click)="cancel()">Hủy</button>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>
