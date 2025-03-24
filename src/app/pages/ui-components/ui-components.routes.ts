@@ -10,6 +10,7 @@ import {AddCategoryComponent} from './add-category/add-category.component';
 import {UserComponent} from './user/user.component';
 import {AddUserComponent} from "./add-user/add-user.component";
 import {EditUserComponent} from "./edit-user/edit-user.component";
+import {CommentComponent} from './comment/comment.component'
 
 export const UiComponentsRoutes: Routes = [
   {
@@ -50,6 +51,10 @@ export const UiComponentsRoutes: Routes = [
       {
         path: 'edit-user',
         component: EditUserComponent,
+      },
+      {
+        path: 'comment',
+        component: CommentComponent,
       },
     ],
   },
