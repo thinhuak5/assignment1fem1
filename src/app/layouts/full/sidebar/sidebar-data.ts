@@ -1,32 +1,17 @@
-import {NavItem} from './nav-item/nav-item';
+import { NavItem } from './nav-item/nav-item';
 
 export const navItems: NavItem[] = [
   {
     navCap: 'Trang chủ', // hiển thị tên
   },
   {
-    displayName: 'Tổng quan', // ten hien thi
+    displayName: 'Dashboard', // ten hien thi
     iconName: 'layout-grid-add', // hiên thị icon
     route: '/dashboard', // định nghĩa đường dẫn
   },
   {
     navCap: 'Chức năng',
   },
-  // {
-  //   displayName: 'Chips',
-  //   iconName: 'info-circle',
-  //   route: '/ui-components/chips',
-  // },
-  // {
-  //   displayName: 'Lists',
-  //   iconName: 'list-details',
-  //   route: '/ui-components/lists',
-  // },
-  // {
-  //   displayName: 'Forms',
-  //   iconName: 'clipboard-text',
-  //   route: '/ui-components/forms',
-  // },
   {
     displayName: 'Sản Phẩm',
     iconName: 'table',
@@ -39,6 +24,12 @@ export const navItems: NavItem[] = [
   },
   {
     navCap: 'Người dùng',
+    displayName: 'Khach hang',
+    iconName: 'users',
+    route: '/ui-components/user',
+  },
+  {
+    navCap: 'Auth',
   },
   {
     displayName: 'Đăng nhập',
