@@ -18,7 +18,7 @@ export const navItems: NavItem[] = [
     route: '/ui-components/tables',
   },
   {
-    displayName: 'Order',
+    displayName: 'Đơn Hàng',
     iconName: 'shopping-cart',
     route: '/ui-components/order',
   },
@@ -28,8 +28,8 @@ export const navItems: NavItem[] = [
     route: '/ui-components/category',
   },
   {
-    displayName: 'Binh Luan',
-    iconName: 'table',
+    displayName: 'Bình Luận',
+    iconName: 'message-circle',
     route: '/ui-components/comment',
   },
   {
