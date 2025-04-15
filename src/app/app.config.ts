@@ -1,34 +1,20 @@
-import {
-  ApplicationConfig,
-  provideZoneChangeDetection,
-  importProvidersFrom,
-} from '@angular/core';
-import {
-  HttpClient,
-  provideHttpClient,
-  withInterceptorsFromDi,
-} from '@angular/common/http';
-import { routes } from './app.routes';
-import {
-  provideRouter,
-  withComponentInputBinding,
-  withInMemoryScrolling,
-} from '@angular/router';
-import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import { provideClientHydration } from '@angular/platform-browser';
-import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
-import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import {ApplicationConfig, importProvidersFrom, provideZoneChangeDetection,} from '@angular/core';
+import {provideHttpClient, withFetch, withInterceptorsFromDi,} from '@angular/common/http';
+import {routes} from './app.routes';
+import {provideRouter, withComponentInputBinding, withInMemoryScrolling,} from '@angular/router';
+import {provideAnimationsAsync} from '@angular/platform-browser/animations/async';
+import {provideClientHydration, withEventReplay} from '@angular/platform-browser';
 
 // icons
-import { TablerIconsModule } from 'angular-tabler-icons';
+import {TablerIconsModule} from 'angular-tabler-icons';
 import * as TablerIcons from 'angular-tabler-icons/icons';
 
 // perfect scrollbar
-import { NgScrollbarModule } from 'ngx-scrollbar';
+import {NgScrollbarModule} from 'ngx-scrollbar';
 
 //Import all material modules
-import { MaterialModule } from './material.module';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {MaterialModule} from './material.module';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -44,6 +30,8 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(withInterceptorsFromDi()),
     provideClientHydration(),
     provideAnimationsAsync(),
+    provideClientHydration(withEventReplay()),
+    provideHttpClient(withFetch()),
     importProvidersFrom(
       FormsModule,
       ReactiveFormsModule,

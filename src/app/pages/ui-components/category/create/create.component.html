@@ -1,0 +1,26 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <mat-form-field appearance="outline" class="w-100 mb-4">
+    <mat-label>Tên danh mục</mat-label>
+    <input matInput formControlName="name" placeholder="Nhập tên danh mục"/>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="w-100 mb-4">
+    <mat-label>Ảnh danh mục</mat-label>
+    <input matInput formControlName="images" placeholder="URL ảnh hoặc chọn file"/>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="w-100 mb-4">
+    <mat-label>Trạng thái danh mục</mat-label>
+    <mat-select formControlName="status">
+      <mat-option [value]="1">Hiển thị</mat-option>
+      <mat-option [value]="0">Ẩn</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">
+    Thêm Danh Mục
+  </button>
+  <button mat-stroked-button color="primary" type="button" [routerLink]="['/ui-components/category']">
+    Quay lại
+  </button>
+</form>

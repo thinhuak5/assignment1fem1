@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, inject} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {MatTableModule} from '@angular/material/table';
 import {MatCardModule} from '@angular/material/card';
@@ -7,54 +7,14 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatButtonModule} from '@angular/material/button';
 import {RouterModule} from '@angular/router';
-
-export interface PeriodicElement {
-  id: number;
-  name: string;
-  description: string;
-  images: string;
-  status: number;
-}
-
-
-const ELEMENT_DATA: PeriodicElement[] = [
-  {
-    id: 1,
-    name: ' Anime/Manga',
-    description: 'Gundam, One Piece, Dragon Ball, Naruto, Attack on Titan…',
-    images: 'assets/images/products/anime.jpg',
-    status: 1
-  },
-  {
-    id: 2,
-    name: ' Phim ảnh',
-    description: 'Marvel, DC, Star Wars, Harry Potter…',
-    images: 'assets/images/products/anime.jpg',
-    status: 1
-  },
-  {
-    id: 3,
-    name: 'Game',
-    description: 'Genshin Impact,Honkai Star rail,Wuthering waves,...',
-    images: 'assets/images/products/anime.jpg',
-    status: 1
-  },
-  {
-    id: 4,
-    name: 'Thể thao',
-    description: 'Mô hình cầu thủ bóng đá, vận động viên thể thao',
-    images: 'assets/images/products/anime.jpg',
-    status: 1
-  },
-  {
-    id: 5,
-    name: 'Thần thoại/Fantasy',
-    description: 'Nhân vật thần thoại, quái vật, siêu nhân…',
-    images: 'assets/images/products/anime.jpg',
-    status: 0
-  }
-];
-
+import {CategoryService} from '../../../services/apis/category.service';
+import {ICategory} from '../../../interface/category.interface';
+import {MatDialog} from '@angular/material/dialog';
+import {CloudinaryService} from '../../../services/common/cloudinary.service';
+import {DeleteComponent} from './delete/delete.component';
+// import { CreateComponent } from './create/create.component';
+// import { EditComponent } from './edit/edit.component';
+// import { DetailComponent } from './detail/detail.component';
 
 @Component({
   selector: 'app-category',
@@ -69,6 +29,51 @@ const ELEMENT_DATA: PeriodicElement[] = [
   templateUrl: './category.component.html',
 })
 export class CategoryComponent {
-  displayedColumns: string[] = ['id', 'images', 'name', 'description', 'status', 'actions'];
-  dataSource = ELEMENT_DATA;
+  imageUrl: string = '';
+  list: ICategory[] = [];
+  displayedColumns: string[] = ['id', 'images', 'name', 'status', 'actions'];
+
+  readonly dialog = inject(MatDialog);
+
+  constructor(
+    private cloudinary: CloudinaryService,
+    private categoryService: CategoryService
+  ) {
+    this.getAll();
+  }
+
+  onFileSelected(event: any) {
+    const file = event.target.files[0];
+    if (file) {
+      this.cloudinary.uploadImage(file).subscribe((res: any) => {
+        this.imageUrl = res.secure_url;
+        console.log('Uploaded:', this.imageUrl);
+      });
+    }
+  }
+
+  getAll() {
+    this.categoryService.getCategories().subscribe({
+      next: (res: any) => {
+        this.list = res?.data ?? res;
+        console.log(this.list);
+      },
+      error: (err) => {
+        console.error('Error fetching categories:', err);
+      }
+    })
+  }
+
+  openDialog(id: number, name: string): void {
+    const dialogRef = this.dialog.open(DeleteComponent, {
+      data: {name: name, id: id},
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      if (result) {
+        this.getAll();
+      }
+    });
+  }
 }
