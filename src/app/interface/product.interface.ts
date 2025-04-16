@@ -4,8 +4,8 @@ export interface IProduct {
   images?: string;
   description?: string;
   short_description?: string;
-  price?: number;
-  discount_price?: number;
+  price?: string;
+  discount_price?: string;
   view?: number;
   status?: number;
   category_id?: number;
