@@ -1,0 +1,79 @@
+<mat-card class="edit-product-card">
+  <mat-card-title class="text-center">Sửa sản phẩm</mat-card-title>
+  <mat-card-content>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+      <!-- Tên sản phẩm -->
+      <mat-form-field appearance="outline" class="w-100 mb-4">
+        <mat-label>Tên sản phẩm</mat-label>
+        <input matInput formControlName="name" required/>
+        <mat-error *ngIf="form.get('name')?.invalid && form.get('name')?.touched">Tên sản phẩm là bắt buộc</mat-error>
+      </mat-form-field>
+
+      <!-- Upload ảnh -->
+      <div class="mb-3">
+        <label for="file">Chọn ảnh:</label>
+        <input type="file" id="file" (change)="onFileSelected($event)"/>
+      </div>
+
+      <!-- Xem trước ảnh -->
+      <div *ngIf="form.get('images')?.value" class="mb-3">
+        <p>Ảnh xem trước:</p>
+        <img [src]="form.get('images')?.value" alt="Preview" width="200" class="rounded"/>
+      </div>
+
+      <!-- Giá -->
+      <mat-form-field appearance="outline" class="w-100 mb-4">
+        <mat-label>Giá</mat-label>
+        <input matInput type="text" formControlName="price" required/>
+        <mat-error *ngIf="form.get('price')?.invalid && form.get('price')?.touched">Giá phải lớn hơn hoặc bằng 0
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Giảm giá -->
+      <mat-form-field appearance="outline" class="w-100 mb-4">
+        <mat-label>Giảm giá</mat-label>
+        <input matInput type="text" formControlName="discount_price"/>
+        <mat-error *ngIf="form.get('discount_price')?.invalid && form.get('discount_price')?.touched">Giảm giá phải lớn
+          hơn hoặc bằng 0
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Trạng thái -->
+      <mat-form-field appearance="outline" class="w-100 mb-4">
+        <mat-label>Trạng thái</mat-label>
+        <mat-select formControlName="status" required>
+          <mat-option [value]="1">Còn hàng</mat-option>
+          <mat-option [value]="0">Hết hàng</mat-option>
+        </mat-select>
+        <mat-error *ngIf="form.get('status')?.invalid && form.get('status')?.touched">Trạng thái là bắt buộc</mat-error>
+      </mat-form-field>
+
+      <!-- Mô tả -->
+      <mat-form-field appearance="outline" class="w-100 mb-4">
+        <mat-label>Mô tả</mat-label>
+        <textarea matInput formControlName="description" placeholder="Nhập mô tả sản phẩm"></textarea>
+      </mat-form-field>
+
+      <!-- Danh mục -->
+      <mat-form-field appearance="outline" class="w-100 mb-4">
+        <mat-label>Danh mục</mat-label>
+        <mat-select formControlName="category_id" required>
+          <mat-option [value]="2">Danh mục 1</mat-option>
+          <mat-option [value]="2">Danh mục 2</mat-option>
+        </mat-select>
+        <mat-error *ngIf="form.get('category_id')?.invalid && form.get('category_id')?.touched">Danh mục là bắt buộc
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Hành động -->
+      <div class="actions">
+        <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">Cập nhật</button>
+        <button mat-raised-button color="warn" type="button" (click)="router.navigate(['/ui-components/products'])">
+          Hủy
+        </button>
+      </div>
+
+    </form>
+  </mat-card-content>
+</mat-card>

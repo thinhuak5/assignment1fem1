@@ -1,1 +1,110 @@
-<p>product works!</p>
+<mat-card class="cardWithShadow">
+  <mat-card-content>
+    <mat-card-title>Bảng sản phẩm</mat-card-title>
+    <button mat-raised-button color="primary" [routerLink]="['/ui-components/product/add-product']">
+      <mat-icon>add</mat-icon>
+      Thêm Sản Phẩm
+    </button>
+    <div class="table-responsive">
+      <table mat-table [dataSource]="list" class="w-100">
+        <!-- Position Column -->
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef class="f-w-600 f-s-14 p-l-0">
+            ID
+          </th>
+          <td mat-cell *matCellDef="let element" class="p-l-0">
+            {{ element.id }}
+          </td>
+        </ng-container>
+
+        <!-- Images Column -->
+        <ng-container matColumnDef="images">
+          <th mat-header-cell *matHeaderCellDef class="f-w-600 f-s-14">
+            Hình ảnh
+          </th>
+          <td mat-cell *matCellDef="let element">
+            <img [src]="element.images" alt="Product Image" width="150" height="100"/>
+          </td>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef class="f-w-600 f-s-14">
+            Tên sản phẩm
+          </th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.name }}
+          </td>
+        </ng-container>
+        <!-- Description Column -->
+        <ng-container matColumnDef="description">
+          <th mat-header-cell *matHeaderCellDef class="f-w-600 f-s-14">
+            Mô tả
+          </th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.description }}
+          </td>
+        </ng-container>
+
+        <!-- Category ID Column -->
+        <ng-container matColumnDef="category_id">
+          <th mat-header-cell *matHeaderCellDef class="f-w-600 f-s-14">
+            Mã danh mục
+          </th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.category_id }}
+          </td>
+        </ng-container>
+
+        <!-- Price Column -->
+        <ng-container matColumnDef="price">
+          <th mat-header-cell *matHeaderCellDef class="f-w-600 f-s-14">
+            Giá
+          </th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.price | number:'1.0-0' }} VNĐ
+          </td>
+        </ng-container>
+
+        <!-- View Column -->
+        <ng-container matColumnDef="view">
+          <th mat-header-cell *matHeaderCellDef class="f-w-600 f-s-14">
+            Lượt xem
+          </th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.view }}
+          </td>
+        </ng-container>
+
+        <!-- Status Column -->
+        <ng-container matColumnDef="status">
+          <th mat-header-cell *matHeaderCellDef> Trạng Thái</th>
+          <td mat-cell *matCellDef="let item" [ngStyle]="{'color': item.status === 1 ? 'green' : 'red'}">
+            {{ item.status === 1 ? 'Hiển thị' : 'Ẩn' }}
+          </td>
+        </ng-container>
+
+
+        <!-- Actions Column -->
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef class="f-w-600 f-s-14">
+            Hành động
+          </th>
+          <td mat-cell *matCellDef="let element">
+            <button mat-icon-button color="primary" [routerLink]="['/ui-components/product/edit-product', element.id]"
+                    matTooltip="Sửa sản phẩm">
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-icon-button color="warn" (click)="openDialog(element.id, element.name)"
+                    matTooltip="Xóa sản phẩm">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </table>
+    </div>
+  </mat-card-content>
+</mat-card>
