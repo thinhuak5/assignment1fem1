@@ -63,7 +63,6 @@ export class AddProductComponent {
   onSubmit() {
     if (this.form.invalid) return;
 
-    // Gửi dữ liệu lên API để tạo sản phẩm
     this.productService.createProducts(this.form.value).subscribe({
       next: () => {
         alert('Thêm sản phẩm thành công!');

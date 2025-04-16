@@ -1,0 +1,6 @@
+<h2 mat-dialog-title>Xác nhận xoá</h2>
+<mat-dialog-content>Bạn có chắc muốn xoá <strong>{{ data.name }}</strong> không?</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button mat-dialog-close>Hủy</button>
+  <button mat-button color="warn" (click)="delete()">Xoá</button>
+</mat-dialog-actions>

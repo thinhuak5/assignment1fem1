@@ -15,7 +15,7 @@ export const navItems: NavItem[] = [
   {
     displayName: 'Sản Phẩm',
     iconName: 'table',
-    route: '/ui-components/tables',
+    route: '/ui-components/products',
   },
   {
     displayName: 'Đơn Hàng',

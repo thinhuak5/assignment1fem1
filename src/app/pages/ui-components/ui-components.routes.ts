@@ -4,7 +4,6 @@ import {Routes} from '@angular/router';
 import {AppChipsComponent} from './chips/chips.component';
 import {AppListsComponent} from './lists/lists.component';
 import {AppFormsComponent} from './forms/forms.component';
-import {AppTablesComponent} from './tables/tables.component';
 import {CategoryComponent} from './category/category.component';
 import {EditComponent} from "./category/edit/edit.component";
 import {AddCategoryComponent} from './category/create/create.component';
@@ -12,10 +11,11 @@ import {UserComponent} from './user/user.component';
 import {AddUserComponent} from "./add-user/add-user.component";
 import {EditUserComponent} from "./edit-user/edit-user.component";
 import {CommentComponent} from './comment/comment.component'
-import {AddProductComponent} from './add-product/add-product.component';
-import {EditProductComponent} from './edit-product/edit-product.component';
-import {AppOrdersComponent} from './order/order.component'; // Thêm component đơn hàng
-import {EditOrderComponent} from './edit-order/edit-order.component'; // Giả định component thêm đơn hàng
+import {AddProductComponent} from './product/add-product/add-product.component';
+import {EditProductComponent} from './product/edit-product/edit-product.component';
+import {AppOrdersComponent} from './order/order.component';
+import {EditOrderComponent} from './edit-order/edit-order.component';
+import {ProductComponent} from './product/product.component';
 
 export const UiComponentsRoutes: Routes = [
   {
@@ -34,8 +34,8 @@ export const UiComponentsRoutes: Routes = [
         component: AppFormsComponent,
       },
       {
-        path: 'tables',
-        component: AppTablesComponent,
+        path: 'products',
+        component: ProductComponent,
       },
       {
         path: 'order',
@@ -74,11 +74,11 @@ export const UiComponentsRoutes: Routes = [
         component: CommentComponent,
       },
       {
-        path: 'add-product',
+        path: 'product/add-product',
         component: AddProductComponent,
       },
       {
-        path: 'edit-product',
+        path: 'product/edit-product/:id',
         component: EditProductComponent,
       },
 

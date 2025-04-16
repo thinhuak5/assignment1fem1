@@ -7,6 +7,13 @@ export const API_ENDPOINT = {
     base: API_BASE_URL + '/api', // Thêm '/api' vào base URL
     login: '/login',
   },
+  products: {
+    base: API_BASE_URL + '/api' + '/products',
+    list: '/list',
+    add: '/add',
+    update: '/:id',
+    delete: '/:id',
+  },
   category: {
     base: API_BASE_URL + '/api' + '/categories',
     list: '/list',
