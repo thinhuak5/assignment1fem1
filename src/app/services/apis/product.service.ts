@@ -25,10 +25,6 @@ export class ProductsService extends ApiService {
     return this.delete(API_ENDPOINT.products.base + '/' + id);
   }
 
-  getProductsById(id: string): Observable<IProduct> {
-    return this.get<IProduct>(API_ENDPOINT.products.base + '/' + id);
-  }
-
   createProducts(formData: FormData) {
     return this.post(API_ENDPOINT.products.base + '/add', formData);
   }
