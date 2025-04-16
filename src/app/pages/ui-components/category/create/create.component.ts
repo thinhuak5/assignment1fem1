@@ -6,6 +6,8 @@ import {MatInputModule} from '@angular/material/input';
 import {MatCardModule} from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button';
 import {MatSelectModule} from '@angular/material/select';
+import {CloudinaryService} from "../../../../services/common/cloudinary.service";
+import {CommonModule} from "@angular/common";
 
 @Component({
   selector: 'app-add-category',
@@ -17,22 +19,34 @@ import {MatSelectModule} from '@angular/material/select';
     MatButtonModule,
     MatSelectModule,
     ReactiveFormsModule,
+    CommonModule,
   ],
   templateUrl: './create.component.html',
 })
 export class AddCategoryComponent {
   form: FormGroup;
 
+  // @ts-ignore
   constructor(
     private fb: FormBuilder,
     private categoryService: CategoryService,
-    private router: Router
+    private router: Router,
+    private cloudinary: CloudinaryService
   ) {
     this.form = this.fb.group({
       name: ['', Validators.required],
       images: ['', Validators.required],
       status: [1, Validators.required]
     });
+  }
+
+  onFileSelected(event: any) {
+    const file = event.target.files[0];
+    if (file) {
+      this.cloudinary.uploadImage(file).subscribe((res: any) => {
+        this.form.get('images')?.setValue(res.secure_url);
+      });
+    }
   }
 
   onSubmit() {

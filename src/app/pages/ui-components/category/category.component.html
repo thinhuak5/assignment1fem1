@@ -21,7 +21,8 @@
         <ng-container matColumnDef="images">
           <th mat-header-cell *matHeaderCellDef> Hình Ảnh</th>
           <td mat-cell *matCellDef="let item">
-            <img [src]="item.images" alt="image" width="150" height="100" class="rounded"/>
+            <img [src]="item.images || 'assets/images/default.jpg'" alt="image" width="150" height="100"
+                 class="rounded"/>
           </td>
         </ng-container>
 
@@ -43,6 +44,9 @@
         <ng-container matColumnDef="actions">
           <th mat-header-cell *matHeaderCellDef> Hành Động</th>
           <td mat-cell *matCellDef="let item">
+            <a mat-icon-button color="primary" [routerLink]="['/ui-components/category/edit', item.id]">
+              <mat-icon>edit</mat-icon>
+            </a>
             <button (click)="openDialog(item.id, item.name)" mat-icon-button color="warn">
               <mat-icon>delete</mat-icon>
             </button>

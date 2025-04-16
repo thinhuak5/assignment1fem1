@@ -6,6 +6,7 @@ import {AppListsComponent} from './lists/lists.component';
 import {AppFormsComponent} from './forms/forms.component';
 import {AppTablesComponent} from './tables/tables.component';
 import {CategoryComponent} from './category/category.component';
+import {EditComponent} from "./category/edit/edit.component";
 import {AddCategoryComponent} from './category/create/create.component';
 import {UserComponent} from './user/user.component';
 import {AddUserComponent} from "./add-user/add-user.component";
@@ -51,6 +52,10 @@ export const UiComponentsRoutes: Routes = [
       {
         path: 'category/create',
         component: AddCategoryComponent,
+      },
+      {
+        path: 'category/edit/:id',
+        component: EditComponent,
       },
       {
         path: 'user',

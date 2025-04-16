@@ -12,6 +12,9 @@ import {ICategory} from '../../../interface/category.interface';
 import {MatDialog} from '@angular/material/dialog';
 import {CloudinaryService} from '../../../services/common/cloudinary.service';
 import {DeleteComponent} from './delete/delete.component';
+import {MatInputModule} from "@angular/material/input";
+import {MatSelectModule} from "@angular/material/select";
+import {ReactiveFormsModule} from "@angular/forms";
 // import { CreateComponent } from './create/create.component';
 // import { EditComponent } from './edit/edit.component';
 // import { DetailComponent } from './detail/detail.component';
@@ -25,6 +28,9 @@ import {DeleteComponent} from './delete/delete.component';
     MatMenuModule,
     MatButtonModule,
     CommonModule,
+    MatInputModule,
+    MatSelectModule,
+    ReactiveFormsModule,
     RouterModule],
   templateUrl: './category.component.html',
 })

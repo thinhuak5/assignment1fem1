@@ -1,0 +1,49 @@
+<mat-card class="cardWithShadow">
+  <mat-card-content>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <!-- Tiêu đề (hiển thị tùy chế độ) -->
+      <h2 class="mb-4">{{ isEditMode ? 'Chỉnh sửa Danh Mục' : 'Thêm Danh Mục' }}</h2>
+
+      <!-- Tên danh mục -->
+      <mat-form-field appearance="outline" class="w-100 mb-4">
+        <mat-label>Tên danh mục</mat-label>
+        <input matInput formControlName="name" placeholder="Nhập tên danh mục"/>
+      </mat-form-field>
+
+      <!-- Upload ảnh -->
+      <div class="mb-3">
+        <label for="file">Chọn ảnh danh mục:</label>
+        <input type="file" id="file" (change)="onFileSelected($event)"/>
+      </div>
+
+      <!-- Xem trước ảnh -->
+      <div *ngIf="form.get('images')?.value" class="mb-3">
+        <p>Ảnh xem trước:</p>
+        <img [src]="form.get('images')?.value" alt="Preview" width="200" class="rounded"/>
+      </div>
+
+      <!-- URL ảnh -->
+      <mat-form-field appearance="outline" class="w-100 mb-4">
+        <mat-label>URL ảnh danh mục</mat-label>
+        <input matInput formControlName="images" placeholder="URL ảnh"/>
+      </mat-form-field>
+
+      <!-- Trạng thái -->
+      <mat-form-field appearance="outline" class="w-100 mb-4">
+        <mat-label>Trạng thái danh mục</mat-label>
+        <mat-select formControlName="status">
+          <mat-option [value]="1">Hiển thị</mat-option>
+          <mat-option [value]="0">Ẩn</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <!-- Nút hành động -->
+      <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">
+        {{ isEditMode ? 'Cập Nhật' : 'Thêm Danh Mục' }}
+      </button>
+      <button type="button" mat-stroked-button color="primary" [routerLink]="['/ui-components/category']">
+        Quay lại
+      </button>
+    </form>
+  </mat-card-content>
+</mat-card>

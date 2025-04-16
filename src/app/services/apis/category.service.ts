@@ -27,9 +27,13 @@ export class CategoryService extends ApiService { // ApiService la cha
     return this.post(API_ENDPOINT.category.base + '/add', data);
   }
 
+  getById(id: number): Observable<ICategory> {
+    return this.get<ICategory>(API_ENDPOINT.category.base + '/' + id);
+  }
+
+
   updateCategory(id: number, data: any) {
     return this.put(API_ENDPOINT.category.base + '/' + id, data);
   }
-
 
 }

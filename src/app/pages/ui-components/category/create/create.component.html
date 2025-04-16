@@ -1,14 +1,29 @@
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <!-- Tên danh mục -->
   <mat-form-field appearance="outline" class="w-100 mb-4">
     <mat-label>Tên danh mục</mat-label>
     <input matInput formControlName="name" placeholder="Nhập tên danh mục"/>
   </mat-form-field>
 
+  <!-- Upload ảnh -->
+  <div class="mb-3">
+    <label for="file">Chọn ảnh danh mục:</label>
+    <input type="file" id="file" (change)="onFileSelected($event)"/>
+  </div>
+
+  <!-- Xem trước ảnh đã upload -->
+  <div *ngIf="form.get('images')?.value" class="mb-3">
+    <p>Ảnh xem trước:</p>
+    <img [src]="form.get('images')?.value" alt="Preview" width="200" class="rounded"/>
+  </div>
+
+  <!-- URL ảnh (có thể ẩn nếu muốn) -->
   <mat-form-field appearance="outline" class="w-100 mb-4">
-    <mat-label>Ảnh danh mục</mat-label>
-    <input matInput formControlName="images" placeholder="URL ảnh hoặc chọn file"/>
+    <mat-label>URL ảnh danh mục</mat-label>
+    <input matInput formControlName="images" placeholder="URL ảnh"/>
   </mat-form-field>
 
+  <!-- Trạng thái -->
   <mat-form-field appearance="outline" class="w-100 mb-4">
     <mat-label>Trạng thái danh mục</mat-label>
     <mat-select formControlName="status">
@@ -17,6 +32,7 @@
     </mat-select>
   </mat-form-field>
 
+  <!-- Nút hành động -->
   <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">
     Thêm Danh Mục
   </button>
