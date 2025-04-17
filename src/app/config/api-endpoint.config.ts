@@ -6,6 +6,7 @@ export const API_ENDPOINT = {
   auth: {
     base: API_BASE_URL + '/api', // Thêm '/api' vào base URL
     login: '/login',
+    register: '/register',
   },
   products: {
     base: API_BASE_URL + '/api' + '/products',

@@ -41,7 +41,6 @@ export class AppSideLoginComponent implements OnInit {
         Validators.required,
         Validators.minLength(6)
       ]),
-      rememberMe: new FormControl(false)
     });
   }
 

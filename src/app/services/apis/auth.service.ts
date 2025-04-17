@@ -9,6 +9,7 @@ import {API_ENDPOINT} from "../../config/api-endpoint.config";
 import {ApiService} from '../common/api.service';
 import {IAlertMessage} from '../../interface/alert-message.interface';
 import {ILogin} from '../../interface/login.interface';
+import {IRegister} from '../../interface/register.interface'; // Import IRegister nếu cần
 
 @Injectable({
   providedIn: 'root',
@@ -26,9 +27,18 @@ export class AuthService extends ApiService {
     super(_http);
   }
 
-
+  // Đăng nhập
   login(form: ILogin): Observable<ILogin> {
     return this.post<ILogin>(API_ENDPOINT.auth.base + API_ENDPOINT.auth.login, {
+      email: form.email.trim(),
+      password: form.password.trim(),
+    });
+  }
+
+  // Đăng ký
+  register(form: IRegister): Observable<IRegister> {
+    return this.post<IRegister>(API_ENDPOINT.auth.base + API_ENDPOINT.auth.register, {
+      name: form.name.trim(),
       email: form.email.trim(),
       password: form.password.trim(),
     });
