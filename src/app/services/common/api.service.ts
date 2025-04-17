@@ -1,14 +1,11 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-
 import {Observable} from 'rxjs';
-
 
 @Injectable({
   providedIn: 'root',
 })
 export class ApiService {
-
   constructor(
     private readonly http: HttpClient,
   ) {
@@ -16,9 +13,6 @@ export class ApiService {
 
   /**
    * @method GET
-   * @param apiUrl URL reference to API
-   * @param parameter Ex: [param1, param2, param3] => result: apiUrl/param1/param2/param3
-   * @param customHeaders OPTIONAL: another header value you want to customize
    */
   get<T>(apiUrl: string, parameter: any[] = [], customHeaders?: HttpHeaders): Observable<T> {
     parameter.forEach(p => {
@@ -32,9 +26,6 @@ export class ApiService {
 
   /**
    * @method POST
-   * @param apiUrl URL reference to API
-   * @param body request body
-   * @param customHeaders OPTIONAL: another header value you want to customize
    */
   post<T>(apiUrl: string, body?: T, customHeaders?: HttpHeaders): Observable<T> {
     return this.http.post<T>(
@@ -45,10 +36,23 @@ export class ApiService {
   }
 
   /**
+   * ✅ NEW: POST with FormData (used in UserService)
+   */
+  postForm<T>(apiUrl: string, formData: FormData, customHeaders?: HttpHeaders): Observable<T> {
+    return this.http.post<T>(
+      apiUrl,
+      formData,
+      {
+        headers: customHeaders ?? new HttpHeaders({
+          'Authorization': this.getToken() ?? ''
+          // ❌ Don't set 'Content-Type' here — Angular will handle it automatically for FormData
+        })
+      }
+    );
+  }
+
+  /**
    * @method PATCH
-   * @param apiUrl URL reference to API
-   * @param body request body
-   * @param customHeaders OPTIONAL: another header value you want to customize
    */
   patch<T>(apiUrl: string, body?: T, customHeaders?: HttpHeaders): Observable<T> {
     return this.http.patch<T>(
@@ -60,9 +64,6 @@ export class ApiService {
 
   /**
    * @method PUT
-   * @param apiUrl URL reference to API
-   * @param body request body
-   * @param customHeaders OPTIONAL: another header value you want to customize
    */
   put<T>(apiUrl: string, body?: T, customHeaders?: HttpHeaders): Observable<T> {
     return this.http.put<T>(
@@ -74,9 +75,6 @@ export class ApiService {
 
   /**
    * @method DELETE
-   * @param apiUrl URL reference to API
-   * @param parameter Ex: [param1, param2, param3] => result: apiUrl/param1/param2/param3
-   * @param customHeaders OPTIONAL: another header value you want to customize
    */
   delete(apiUrl: string, parameter: any[] = [], customHeaders?: HttpHeaders) {
     if (parameter && parameter.length > 0) {

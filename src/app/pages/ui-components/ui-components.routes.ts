@@ -1,6 +1,6 @@
 import {Routes} from '@angular/router';
 
-// ui
+
 import {AppChipsComponent} from './chips/chips.component';
 import {AppListsComponent} from './lists/lists.component';
 import {AppFormsComponent} from './forms/forms.component';
@@ -8,9 +8,8 @@ import {CategoryComponent} from './category/category.component';
 import {EditComponent} from "./category/edit/edit.component";
 import {AddCategoryComponent} from './category/create/create.component';
 import {UserComponent} from './user/user.component';
-import {AddUserComponent} from "./add-user/add-user.component";
-import {EditUserComponent} from "./edit-user/edit-user.component";
 import {CommentComponent} from './comment/comment.component'
+import {EditUserComponent} from "./user/edit/edit.component";
 import {AddProductComponent} from './product/add-product/add-product.component';
 import {EditProductComponent} from './product/edit-product/edit-product.component';
 import {AppOrdersComponent} from './order/order.component';
@@ -61,14 +60,14 @@ export const UiComponentsRoutes: Routes = [
         path: 'user',
         component: UserComponent,
       },
+
+
       {
-        path: 'add-user',
-        component: AddUserComponent,
+        path: 'user/edit/:id',
+        component: EditUserComponent
       },
-      {
-        path: 'edit-user',
-        component: EditUserComponent,
-      },
+
+
       {
         path: 'comment',
         component: CommentComponent,
@@ -80,6 +79,10 @@ export const UiComponentsRoutes: Routes = [
       {
         path: 'product/edit-product/:id',
         component: EditProductComponent,
+      },
+      {
+        path: 'app-home',
+        component: ClientHome,
       },
 
     ],
