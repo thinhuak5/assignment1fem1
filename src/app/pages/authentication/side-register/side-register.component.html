@@ -1,60 +1,100 @@
 <div class="blank-layout-container justify-content-center align-items-center bg-light">
-  <div class="position-relative row w-100 h-100 bg-gredient justify-content-center">
+  <div class="position-relative row w-100 h-100 bg-gradient justify-content-center">
     <div class="col-lg-4 d-flex align-items-center">
       <mat-card class="cardWithShadow boxed-auth">
-        <mat-card-content class="p-32">
+        <mat-card-content class="p-4">
           <div class="text-center">
-            <a [routerLink]="['/dashboard']">
+            <a [routerLink]="['/']">
               <img src="./assets/images/logos/dark-logo.svg" class="align-middle m-2" alt="logo" />
             </a>
           </div>
 
-          <div class="row m-t-24 custom-row">
+          <div class="row mt-4">
+            <!-- Các nút Google và Facebook -->
             <div class="col-12 col-sm-6">
               <button mat-stroked-button class="w-100">
-                <div class="d-flex align-items-center">
-                  <img src="/assets/images/svgs/google-icon.svg" alt="google" width="16" class="m-r-8" />
-                  Đăng nhập Google
+                <div class="d-flex align-items-center justify-content-center">
+                  <img src="/assets/images/svgs/google-icon.svg" alt="google" width="16" class="me-2"/>
+                  Google
                 </div>
               </button>
             </div>
-            <div class="col-12 col-sm-6">
-              <button mat-stroked-button class="w-100 d-flex align-items-center">
-                <div class="d-flex align-items-center">
-                  <img src="/assets/images/svgs/facebook-icon.svg" alt="facebook" width="40" class="m-r-4" />
-                  Đăng nhập Facebook
+            <div class="col-12 col-sm-6 mt-2 mt-sm-0">
+              <button mat-stroked-button class="w-100">
+                <div class="d-flex align-items-center justify-content-center">
+                  <img src="/assets/images/svgs/facebook-icon.svg" alt="facebook" width="20" class="me-2"/>
+                  Facebook
                 </div>
               </button>
             </div>
           </div>
 
-          <div class="or-border m-t-30">Hoặc đăng nhập bằng</div>
+          <div class="or-border my-4 text-center">Hoặc đăng ký bằng Email</div>
 
-          <form class="m-t-30">
-            <mat-label class="f-s-14 f-w-600 m-b-12 d-block">Tên</mat-label>
-            <mat-form-field appearance="outline" class="w-100" color="primary">
-              <input matInput />
-            </mat-form-field>
-            <mat-label class="f-s-14 f-w-600 m-b-12 d-block">Email</mat-label>
-            <mat-form-field appearance="outline" class="w-100" color="primary">
-              <input matInput type="email" />
-            </mat-form-field>
-            <!-- password -->
-            <mat-label class="f-s-14 f-w-600 m-b-12 d-block">Mật Khẩu</mat-label>
-            <mat-form-field appearance="outline" class="w-100" color="primary">
-              <input matInput type="password" />
-            </mat-form-field>
+          <form [formGroup]="form" (ngSubmit)="submit()">
 
-            <a [routerLink]="['/']" mat-flat-button color="primary" class="w-100">
+            <mat-label class="form-label">Tên đăng nhập</mat-label>
+            <mat-form-field appearance="outline" class="w-100 mb-3" color="primary">
+              <input matInput formControlName="username" placeholder="Tên đăng nhập"/>
+            </mat-form-field>
+            <div *ngIf="f['username'].touched && f['username'].invalid" class="text-danger small mb-3">
+              Tên đăng nhập ít nhất 6 ký tự
+            </div>
+
+            <mat-label class="form-label">Email</mat-label>
+            <mat-form-field appearance="outline" class="w-100 mb-3" color="primary">
+              <input matInput type="email" formControlName="email" placeholder="Email"/>
+            </mat-form-field>
+            <div *ngIf="f['email'].touched && f['email'].invalid" class="text-danger small mb-3">
+              Vui lòng nhập email hợp lệ
+            </div>
+
+            <mat-label class="form-label">Mật khẩu</mat-label>
+            <mat-form-field appearance="outline" class="w-100 mb-3" color="primary">
+              <input matInput type="password" formControlName="password" placeholder="Mật khẩu"/>
+            </mat-form-field>
+            <div *ngIf="f['password'].touched && f['password'].invalid" class="text-danger small mb-3">
+              Mật khẩu ít nhất 6 ký tự
+            </div>
+
+            <!-- Thêm trường "Tên" -->
+            <mat-label class="form-label">Tên đầy đủ</mat-label>
+            <mat-form-field appearance="outline" class="w-100 mb-3" color="primary">
+              <input matInput formControlName="name" placeholder="Tên đầy đủ"/>
+            </mat-form-field>
+            <div *ngIf="f['name'].touched && f['name'].invalid" class="text-danger small mb-3">
+              Tên không được để trống
+            </div>
+
+            <!-- Thêm trường "Số điện thoại" -->
+            <mat-label class="form-label">Số điện thoại</mat-label>
+            <mat-form-field appearance="outline" class="w-100 mb-3" color="primary">
+              <input matInput type="text" formControlName="phone" placeholder="Số điện thoại"/>
+            </mat-form-field>
+            <div *ngIf="f['phone'].touched && f['phone'].invalid" class="text-danger small mb-3">
+              Số điện thoại là bắt buộc
+            </div>
+
+            <!-- Trường avatar -->
+            <!-- Trường avatar -->
+            <mat-label class="form-label">Ảnh đại diện</mat-label>
+            <div class="w-100 mb-3">
+              <input type="file" (change)="onAvatarChange($event)"/>
+            </div>
+
+
+            <button mat-flat-button color="primary" class="w-100 mt-2" type="submit">
               Đăng ký
-            </a>
-            <!-- input -->
+            </button>
           </form>
-          <span class="d-block f-w-500 text-center m-t-24">Đã có tài khoản?
 
-            <a [routerLink]="['/authentication/login']" class="text-decoration-none text-primary f-w-500 f-s-14">
-              Đăng nhập</a>
-          </span>
+          <div class="text-center mt-4">
+            <span class="text-muted">Đã có tài khoản? </span>
+            <a [routerLink]="['/authentication/login']" class="text-primary text-decoration-none">
+              Đăng nhập
+            </a>
+          </div>
+
         </mat-card-content>
       </mat-card>
     </div>

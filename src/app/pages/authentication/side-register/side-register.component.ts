@@ -1,33 +1,78 @@
-import { Component } from '@angular/core';
-import { CoreService } from 'src/app/services/core.service';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
-import { MaterialModule } from 'src/app/material.module';
+import {Component} from '@angular/core';
+import {CoreService} from 'src/app/services/core.service';
+import {FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
+import {Router, RouterModule} from '@angular/router';
+import {CommonModule} from '@angular/common';
+import {MatCardModule} from '@angular/material/card';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import {MatButtonModule} from '@angular/material/button';
+import {MatIconModule} from '@angular/material/icon';
 
 @Component({
   selector: 'app-side-register',
-  imports: [RouterModule, MaterialModule, FormsModule, ReactiveFormsModule],
+  imports: [
+    CommonModule,
+    MatCardModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    RouterModule,
+    ReactiveFormsModule,
+    MatIconModule,
+
+  ],
   templateUrl: './side-register.component.html',
 })
 export class AppSideRegisterComponent {
-  options = this.settings.getOptions();
-
-  constructor(private settings: CoreService, private router: Router) {}
-
   form = new FormGroup({
-    uname: new FormControl('', [Validators.required, Validators.minLength(6)]),
-    email: new FormControl('', [Validators.required]),
-    password: new FormControl('', [Validators.required]),
+    username: new FormControl('', [Validators.required, Validators.minLength(6)]),
+    email: new FormControl('', [Validators.required, Validators.email]),
+    password: new FormControl('', [Validators.required, Validators.minLength(6)]),
+    name: new FormControl('', [Validators.required]),
+    phone: new FormControl('', [Validators.required, Validators.pattern('^[0-9]{10,15}$')]),
+    avatar: new FormControl('', [Validators.required]) // Trường avatar
   });
+
+  constructor(private settings: CoreService, private router: Router) {
+  }
 
   get f() {
     return this.form.controls;
   }
 
   submit() {
-    // console.log(this.form.value);
-    this.router.navigate(['/']);
+    if (this.form.invalid) {
+      this.form.markAllAsTouched();
+      console.log("Form không hợp lệ");
+      return;
+    }
+    console.log("Form hợp lệ, đang gửi dữ liệu...");
+
+    // Gửi thông tin đăng ký
+    const {username, name, email, password, phone} = this.form.value;
+    this.settings.registerUser({username, name, email, password, phone}).subscribe({
+      next: (res) => {
+        alert('Đăng ký thành công!');
+        this.router.navigate(['/authentication/login']);
+      },
+      error: (err) => {
+        console.error('Lỗi khi đăng ký: ', err);
+        alert('Đăng ký thất bại! Vui lòng thử lại.');
+      },
+    });
+  }
+
+
+  // Xử lý sự kiện tải lên ảnh đại diện
+  onAvatarChange(event: any) {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.form.patchValue({avatar: reader.result as string}); // Cập nhật ảnh đại diện
+      };
+      reader.readAsDataURL(file);
+    }
   }
 }
