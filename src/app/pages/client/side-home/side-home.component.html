@@ -2,55 +2,21 @@
 <app-header></app-header>
 
 <!-- Banner -->
+<!-- Product List -->
 <div class="container my-4">
-  <div class="p-5 text-center bg-light rounded-3">
-    <h1 class="display-5 fw-bold">Chào mừng bạn đến với Website!</h1>
-    <p class="lead">Khám phá những sản phẩm tuyệt vời của chúng tôi.</p>
-    <a routerLink="/san-pham" class="btn btn-primary btn-lg">Mua ngay</a>
-  </div>
-</div>
-
-<!-- Sản phẩm nổi bật -->
-<div class="container my-5">
-  <h2 class="text-center mb-4">Sản phẩm nổi bật</h2>
-  <div class="row row-cols-1 row-cols-md-3 g-4">
-
-    <!-- Sản phẩm 1 -->
-    <div class="col">
-      <div class="card h-100">
-        <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="Sản phẩm 1">
+  <div class="row row-cols-1 row-cols-md-4 g-4">
+    <!-- Hiển thị sản phẩm -->
+    <div class="col" *ngFor="let product of products">
+      <div class="card">
+        <!-- Sửa kích thước ảnh -->
+        <img [src]="product.images" class="card-img-top" alt="{{ product.name }}" style="height: 150px; width: 100%; object-fit: cover;">
         <div class="card-body">
-          <h5 class="card-title">Sản phẩm 1</h5>
-          <p class="card-text">Mô tả ngắn sản phẩm 1.</p>
-          <a routerLink="/san-pham/1" class="btn btn-primary">Xem chi tiết</a>
+          <h5 class="card-title">{{ product.name }}</h5>
+          <p class="card-text">{{ product.description }}</p>
+          <p class="card-text"><strong>Giá: </strong>{{ product.price | currency }}</p>
         </div>
       </div>
     </div>
-
-    <!-- Sản phẩm 2 -->
-    <div class="col">
-      <div class="card h-100">
-        <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="Sản phẩm 2">
-        <div class="card-body">
-          <h5 class="card-title">Sản phẩm 2</h5>
-          <p class="card-text">Mô tả ngắn sản phẩm 2.</p>
-          <a routerLink="/san-pham/2" class="btn btn-primary">Xem chi tiết</a>
-        </div>
-      </div>
-    </div>
-
-    <!-- Sản phẩm 3 -->
-    <div class="col">
-      <div class="card h-100">
-        <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="Sản phẩm 3">
-        <div class="card-body">
-          <h5 class="card-title">Sản phẩm 3</h5>
-          <p class="card-text">Mô tả ngắn sản phẩm 3.</p>
-          <a routerLink="/san-pham/3" class="btn btn-primary">Xem chi tiết</a>
-        </div>
-      </div>
-    </div>
-
   </div>
 </div>
 
