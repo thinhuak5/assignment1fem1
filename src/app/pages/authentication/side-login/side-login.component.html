@@ -1,62 +1,71 @@
 <div class="blank-layout-container justify-content-center align-items-center bg-light">
-  <div class="position-relative row w-100 h-100 bg-gredient justify-content-center">
+  <div class="position-relative row w-100 h-100 bg-gradient justify-content-center">
     <div class="col-lg-4 d-flex align-items-center">
       <mat-card class="cardWithShadow boxed-auth">
         <mat-card-content class="p-32">
+          <!-- Logo -->
           <div class="text-center">
             <a [routerLink]="['/dashboard']">
-              <img src="./assets/images/logos/dark-logo.svg" class="align-middle m-2" alt="logo" />
+              <img src="./assets/images/logos/dark-logo.svg" alt="logo" class="align-middle m-2"/>
             </a>
           </div>
 
-          <div class="row m-t-24 custom-row">
+          <!-- Social Login -->
+          <div class="row mt-3">
+            <div class="col-12 col-sm-6 mb-2 mb-sm-0">
+              <button mat-stroked-button class="w-100">
+                <img src="/assets/images/svgs/google-icon.svg" alt="Google" width="16" class="me-2"/>
+                Đăng nhập Google
+              </button>
+            </div>
             <div class="col-12 col-sm-6">
               <button mat-stroked-button class="w-100">
-                <div class="d-flex align-items-center">
-                  <img src="/assets/images/svgs/google-icon.svg" alt="google" width="16" class="m-r-8" />
-                  <span>
-                  Đăng nhập Google
-                </span>
-                </div>
-              </button>
-            </div>
-            <div class="col-12 col-sm-6">
-              <button mat-stroked-button class="w-100 d-flex align-items-center">
-                <div class="d-flex align-items-center">
-                  <img src="/assets/images/svgs/facebook-icon.svg" alt="facebook" width="40" class="m-r-4" />
-                  Đăng nhập Facebook
-                </div>
+                <img src="/assets/images/svgs/facebook-icon.svg" alt="Facebook" width="20" class="me-2"/>
+                Đăng nhập Facebook
               </button>
             </div>
           </div>
 
-          <div class="or-border m-t-30">hoặc đăng nhập bằng</div>
+          <!-- Divider -->
+          <div class="or-border mt-4 mb-3 text-center">hoặc đăng nhập bằng</div>
 
-          <form class="m-t-30">
-            <mat-label class="f-s-14 f-w-600 m-b-12 d-block">Tên đăng nhập</mat-label>
-            <mat-form-field appearance="outline" class="w-100" color="primary">
-              <input matInput />
-            </mat-form-field>
-            <!-- password -->
-            <mat-label class="f-s-14 f-w-600 m-b-12 d-block">Mật khẩu</mat-label>
-            <mat-form-field appearance="outline" class="w-100" color="primary">
-              <input matInput type="password" />
-            </mat-form-field>
+          <!-- Alert Messages -->
+          <ng-alerts [messages]="alertMessages"></ng-alerts>
 
-            <div class="d-flex align-items-center m-b-12">
-              <mat-checkbox color="primary">Hãy nhớ thiết bị này</mat-checkbox>
-              <a [routerLink]="['/']" class="text-primary f-w-600 text-decoration-none m-l-auto f-s-14">Lấy lại mật khẩu
-                ?</a>
+          <!-- Login Form -->
+          <form [formGroup]="formData" (ngSubmit)="handleLogin()">
+            <div class="mb-3">
+              <label for="email" class="form-label">Email</label>
+              <input type="email" class="form-control" id="email" formControlName="email"
+                     placeholder="Nhập email của bạn">
+              <span class="text-danger" *ngIf="email?.invalid && (email?.dirty || email?.touched)">
+                Email là bắt buộc
+              </span>
             </div>
-            <a [routerLink]="['/']" mat-flat-button color="primary" class="w-100">
-              Đăng nhập
-            </a>
-            <!-- input -->
+
+            <div class="mb-3">
+              <label for="password" class="form-label">Mật khẩu</label>
+              <input type="password" class="form-control" id="password" formControlName="password"
+                     placeholder="Nhập mật khẩu">
+              <span class="text-danger" *ngIf="password?.invalid && (password?.dirty || password?.touched)">
+                Mật khẩu là bắt buộc
+              </span>
+            </div>
+
+            <div class="d-flex align-items-center mb-3">
+              <mat-checkbox color="primary" formControlName="rememberMe">Hãy nhớ thiết bị này</mat-checkbox>
+              <a [routerLink]="['/forgot-password']" class="ms-auto text-primary text-decoration-none">Lấy lại mật
+                khẩu?</a>
+            </div>
+
+            <button class="btn btn-primary w-100" [disabled]="!formData.valid">Đăng nhập</button>
           </form>
-          <span class="d-block f-w-500 text-center m-t-24">Tạo tài khoản mới?
-            <a [routerLink]="['/authentication/register']" class="text-decoration-none text-primary f-w-500 f-s-14">
-              Tạo tài khoản</a>
-          </span>
+
+          <!-- Register link -->
+          <div class="text-center mt-4">
+            <span>Bạn chưa có tài khoản? </span>
+            <a [routerLink]="['/authentication/register']" class="text-primary text-decoration-none">Tạo tài khoản</a>
+          </div>
         </mat-card-content>
       </mat-card>
     </div>

@@ -1,31 +1,72 @@
-import { Component } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { RouterModule } from '@angular/router';
-import { MaterialModule } from 'src/app/material.module';
-import { FormsModule } from '@angular/forms';
-import { ReactiveFormsModule } from '@angular/forms'; //có @angular là của thư viện
+import {Component, OnInit} from '@angular/core';
+import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
+import {Router, RouterModule} from '@angular/router';
+import {AuthService} from '../../../services/apis/auth.service';
+import {IAlertMessage} from '../../../interface/alert-message.interface';
+import {AlertShowcaseComponent} from '../../../common/alert.component';
+import {MaterialModule} from 'src/app/material.module';
+import {CommonModule} from '@angular/common';
 
 @Component({
-  selector: 'app-side-login', // thẻ dùng để in ra nè
-  imports: [RouterModule, MaterialModule, FormsModule, ReactiveFormsModule],
+  selector: 'app-side-login',
+  standalone: true,
+  imports: [
+    RouterModule,
+    MaterialModule,
+    FormsModule,
+    ReactiveFormsModule,
+    AlertShowcaseComponent,
+    CommonModule
+  ],
   templateUrl: './side-login.component.html',
 })
-export class AppSideLoginComponent {
+export class AppSideLoginComponent implements OnInit {
+  formData!: FormGroup;
+  alertMessages: IAlertMessage[] = [];
 
-  constructor( private router: Router) {}
-
-  form = new FormGroup({
-    uname: new FormControl('', [Validators.required, Validators.minLength(6)]),
-    password: new FormControl('', [Validators.required]),
-  });
-
-  get f() {
-    return this.form.controls;
+  constructor(
+    private router: Router,
+    private auth: AuthService
+  ) {
   }
 
-  submit() {
-    // console.log(this.form.value);
-    this.router.navigate(['/']);
+  ngOnInit(): void {
+    this.formData = new FormGroup({
+      email: new FormControl('', [
+        Validators.required,
+        Validators.email,
+        Validators.minLength(6)
+      ]),
+      password: new FormControl('', [
+        Validators.required,
+        Validators.minLength(6)
+      ]),
+      rememberMe: new FormControl(false)
+    });
+  }
+
+  handleLogin(): void {
+    if (this.formData.valid) {
+      this.auth.login(this.formData.value).subscribe({
+        next: (res) => {
+          console.log(res);
+          localStorage.setItem('token', res.token ?? '');
+          this.router.navigate(['/']).then();
+        },
+        error: () => {
+          this.alertMessages = [
+            {status: 'danger', message: 'Tài khoản hoặc mật khẩu không chính xác á'}
+          ];
+        }
+      });
+    }
+  }
+
+  get email() {
+    return this.formData.get('email');
+  }
+
+  get password() {
+    return this.formData.get('password');
   }
 }
