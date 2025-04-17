@@ -1,6 +1,6 @@
-import { Routes } from '@angular/router';
-import { BlankComponent } from './layouts/blank/blank.component';
-import { FullComponent } from './layouts/full/full.component';
+import {Routes} from '@angular/router';
+import {BlankComponent} from './layouts/blank/blank.component';
+import {FullComponent} from './layouts/full/full.component';
 
 export const routes: Routes = [
   {
@@ -9,7 +9,7 @@ export const routes: Routes = [
     children: [
       {
         path: '',
-        redirectTo: '/dashboard',
+        redirectTo: '/home',
         pathMatch: 'full',
       },
       {
@@ -44,6 +44,12 @@ export const routes: Routes = [
       },
     ],
   },
+  {
+    path: '',
+    loadChildren: () =>
+      import('./pages/client/client.routes').then((m) => m.ClientRoutes),
+  },
+
   {
     path: '**',
     redirectTo: 'authentication/error',
