@@ -1,6 +1,4 @@
 import {Routes} from '@angular/router';
-
-
 import {AppChipsComponent} from './chips/chips.component';
 import {AppListsComponent} from './lists/lists.component';
 import {AppFormsComponent} from './forms/forms.component';
@@ -80,11 +78,6 @@ export const UiComponentsRoutes: Routes = [
         path: 'product/edit-product/:id',
         component: EditProductComponent,
       },
-      {
-        path: 'app-home',
-        component: ClientHome,
-      },
-
     ],
   },
 ];

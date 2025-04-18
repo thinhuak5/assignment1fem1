@@ -75,12 +75,23 @@
               Số điện thoại là bắt buộc
             </div>
 
-            <!-- Trường avatar -->
-            <!-- Trường avatar -->
-            <mat-label class="form-label">Ảnh đại diện</mat-label>
-            <div class="w-100 mb-3">
-              <input type="file" (change)="onAvatarChange($event)"/>
+            <!-- Upload ảnh -->
+            <div class="mb-3">
+              <label for="file">Chọn ảnh người dùng:</label>
+              <input type="file" id="file" (change)="onFileSelected($event)"/>
             </div>
+
+            <!-- Xem trước ảnh -->
+            <div *ngIf="form.get('avatar')?.value" class="mb-3">
+              <p>Ảnh xem trước:</p>
+              <img [src]="form.get('avatar')?.value" alt="Preview" width="200" class="rounded"/>
+            </div>
+
+            <!-- URL ảnh -->
+            <mat-form-field appearance="outline" class="w-100 mb-4">
+              <mat-label>URL ảnh người dùng</mat-label>
+              <input matInput formControlName="avatar" placeholder="Nhập URL ảnh"/>
+            </mat-form-field>
 
 
             <button mat-flat-button color="primary" class="w-100 mt-2" type="submit">

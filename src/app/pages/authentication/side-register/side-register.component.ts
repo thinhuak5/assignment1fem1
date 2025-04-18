@@ -8,6 +8,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
+import {CloudinaryService} from "../../../services/common/cloudinary.service";
 
 @Component({
   selector: 'app-side-register',
@@ -34,11 +35,22 @@ export class AppSideRegisterComponent {
     avatar: new FormControl('', [Validators.required]) // Trường avatar
   });
 
-  constructor(private settings: CoreService, private router: Router) {
+  constructor(private settings: CoreService,
+              private router: Router,
+              private cloudinary: CloudinaryService) {
   }
 
   get f() {
     return this.form.controls;
+  }
+
+  onFileSelected(event: any) {
+    const file = event.target.files[0];
+    if (file) {
+      this.cloudinary.uploadImage(file).subscribe((res: any) => {
+        this.form.get('avatar')?.setValue(res.secure_url); // gán URL vào form
+      });
+    }
   }
 
   submit() {
@@ -49,9 +61,10 @@ export class AppSideRegisterComponent {
     }
     console.log("Form hợp lệ, đang gửi dữ liệu...");
 
+
     // Gửi thông tin đăng ký
     const {username, name, email, password, phone} = this.form.value;
-    this.settings.registerUser({username, name, email, password, phone}).subscribe({
+    this.settings.registerUser(this.form.value).subscribe({
       next: (res) => {
         alert('Đăng ký thành công!');
         this.router.navigate(['/authentication/login']);
@@ -64,15 +77,5 @@ export class AppSideRegisterComponent {
   }
 
 
-  // Xử lý sự kiện tải lên ảnh đại diện
-  onAvatarChange(event: any) {
-    const file = event.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = () => {
-        this.form.patchValue({avatar: reader.result as string}); // Cập nhật ảnh đại diện
-      };
-      reader.readAsDataURL(file);
-    }
-  }
 }
+

@@ -33,14 +33,9 @@ export const navItems: NavItem[] = [
     route: '/ui-components/comment',
   },
   {
-    displayName: 'Khach hang',
+    displayName: 'Khách hàng',
     iconName: 'users',
     route: '/ui-components/user',
-  },
-  {
-    displayName: 'trang chủ',
-    iconName: 'users',
-    route: '/ui-components/app-home',
   },
   {
     navCap: 'Auth',
