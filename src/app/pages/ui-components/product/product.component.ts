@@ -31,7 +31,7 @@ import {DeleteComponent} from './delete-product/delete-product.component';
 export class ProductComponent {
   imageUrl: string = '';
   list: IProduct[] = [];
-  displayedColumns: string[] = ['id', 'images', 'price', 'name', 'description', 'category_id', 'status', 'actions'];
+  displayedColumns: string[] = ['id', 'images', 'price', 'name', 'category_id', 'status', 'actions'];
   readonly dialog = inject(MatDialog);
 
   constructor(

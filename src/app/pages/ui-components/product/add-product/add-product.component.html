@@ -45,10 +45,15 @@
         <mat-error *ngIf="form.get('status')?.invalid && form.get('status')?.touched">Trạng thái là bắt buộc</mat-error>
       </mat-form-field>
 
-      <!-- Mô tả -->
+      <!-- Mô tả ngan-->
       <mat-form-field appearance="outline" class="w-100 mb-4">
-        <mat-label>Mô tả</mat-label>
-        <textarea matInput formControlName="description" placeholder="Nhập mô tả sản phẩm"></textarea>
+        <mat-label>Mô tả ngắn</mat-label>
+        <textarea matInput formControlName="description" placeholder="Nhập mô tả ngắn sản phẩm"></textarea>
+      </mat-form-field>
+      <!-- Mô tả dai -->
+      <mat-form-field appearance="outline" class="w-100 mb-4">
+        <mat-label>Mô tả dài</mat-label>
+        <textarea matInput formControlName="short_description" placeholder="Nhập mô tả dài sản phẩm"></textarea>
       </mat-form-field>
 
       <!-- Danh mục -->

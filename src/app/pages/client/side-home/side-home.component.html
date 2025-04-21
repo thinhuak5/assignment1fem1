@@ -7,18 +7,22 @@
   <div class="row row-cols-1 row-cols-md-4 g-4">
     <!-- Hiển thị sản phẩm -->
     <div class="col" *ngFor="let product of products">
-      <div class="card">
-        <!-- Sửa kích thước ảnh -->
-        <img [src]="product.images" class="card-img-top" alt="{{ product.name }}" style="height: 150px; width: 100%; object-fit: cover;">
-        <div class="card-body">
-          <h5 class="card-title">{{ product.name }}</h5>
-          <p class="card-text">{{ product.description }}</p>
-          <p class="card-text"><strong>Giá: </strong>{{ product.price | currency }}</p>
+      <div class="card h-100 shadow-sm border-0 rounded-4 overflow-hidden product-card">
+        <!-- Ảnh sản phẩm -->
+        <img [src]="product.images"
+             class="card-img-top"
+             alt="{{ product.name }}"
+             style="height: 180px; width: 100%; object-fit: cover;">
+        <div class="card-body d-flex flex-column justify-content-between">
+          <h5 class="card-title text-truncate" title="{{ product.name }}">{{ product.name }}</h5>
+          <p class="card-text small text-muted" style="min-height: 48px;">{{ product.description }}</p>
+          <p class="card-text mt-2 fw-bold text-primary">Giá: {{ product.price | number: '1.0-0' }} VNĐ</p>
         </div>
       </div>
     </div>
   </div>
 </div>
+
 
 <!-- Import Footer -->
 <app-footer></app-footer>

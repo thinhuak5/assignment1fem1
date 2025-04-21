@@ -39,6 +39,7 @@ export class AddProductComponent {
       discount_price: [0, [Validators.min(0)]],
       status: [Validators.required],
       description: [''], // Mô tả sản phẩm
+      short_description: [''],
       category_id: [null, Validators.required], // Mã danh mục
     });
   }
