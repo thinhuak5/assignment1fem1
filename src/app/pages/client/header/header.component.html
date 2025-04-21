@@ -11,8 +11,28 @@
         <li class="nav-item"><a class="nav-link active" routerLink="/">Trang chủ</a></li>
         <li class="nav-item"><a class="nav-link" routerLink="/product">Sản phẩm</a></li>
         <li class="nav-item"><a class="nav-link" routerLink="/gio-hang">Giỏ hàng</a></li>
-        <li class="nav-item"><a class="nav-link" routerLink="/dang-nhap">Đăng nhập</a></li>
-        <li class="nav-item"><a class="nav-link" routerLink="/dang-ky">Đăng ký</a></li>
+
+        <!-- Nếu đã đăng nhập -->
+        <ng-container *ngIf="isLoggedIn(); else loggedOut">
+          <li class="nav-item dropdown user-dropdown" (mouseenter)="showMenu = true" (mouseleave)="showMenu = false">
+            <div class="d-flex align-items-center nav-link dropdown-toggle">
+              <img [src]="userAvatar || 'https://via.placeholder.com/40'" alt="avatar" class="avatar me-2"/>
+              <span>{{ userName }}</span>
+            </div>
+            <ul class="dropdown-menu show" *ngIf="showMenu">
+              <li><a class="dropdown-item" routerLink="/profile">Xem tài khoản</a></li>
+              <li>
+                <button class="dropdown-item" (click)="logout()">Đăng xuất</button>
+              </li>
+            </ul>
+          </li>
+        </ng-container>
+
+        <!-- Nếu chưa đăng nhập -->
+        <ng-template #loggedOut>
+          <li class="nav-item"><a class="nav-link" routerLink="/login">Đăng nhập</a></li>
+          <li class="nav-item"><a class="nav-link" routerLink="/register">Đăng ký</a></li>
+        </ng-template>
       </ul>
     </div>
   </div>
