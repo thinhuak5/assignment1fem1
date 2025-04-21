@@ -1,1 +1,19 @@
-<p>cart works!</p>
+<div class="container my-4">
+  <h2>Giỏ hàng của bạn</h2>
+  <div *ngIf="cartItems.length === 0">
+    <p>Giỏ hàng của bạn đang trống.</p>
+  </div>
+  <div *ngFor="let item of cartItems">
+    <div class="row">
+      <div class="col-md-8">
+        <h5>{{ item.product.name }}</h5>
+        <p>{{ item.product.short_description }}</p>
+        <p>Số lượng: {{ item.quantity }}</p>
+        <p>Giá: {{ item.price | number: '1.0-0' }} VNĐ</p>
+      </div>
+      <div class="col-md-4">
+        <button (click)="removeFromCart(item.product.id)" class="btn btn-danger">Xóa</button>
+      </div>
+    </div>
+  </div>
+</div>

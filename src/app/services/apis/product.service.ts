@@ -33,4 +33,9 @@ export class ProductsService extends ApiService {
     return this.put(API_ENDPOINT.products.base + '/' + id, data);
   }
 
+  getProductById(id: number): Observable<IProduct> {
+    return this.get<IProduct>(API_ENDPOINT.products.base + '/' + id); // Đảm bảo API này đang hoạt động đúng
+  }
+
+
 }

@@ -1,0 +1,20 @@
+<!-- Import Header -->
+<app-header></app-header>
+
+<div class="container my-4" *ngIf="product">
+  <div class="row">
+    <div class="col-md-6">
+      <img [src]="product.images" class="img-fluid" alt="{{ product.name }}">
+    </div>
+    <div class="col-md-6">
+      <h2>{{ product.name }}</h2>
+      <p>{{ product.description }}</p>
+      <p><strong>Giá:</strong> {{ product.price | number: '1.0-0' }} VNĐ</p>
+      <p><strong>Giảm giá:</strong> {{ product.discount_price | number: '1.0-0' }} VNĐ</p>
+      <p><strong>Lượt xem:</strong> {{ product.view }}</p>
+    </div>
+  </div>
+</div>
+
+<!-- Import Footer -->
+<app-footer></app-footer>

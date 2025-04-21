@@ -27,5 +27,12 @@ export const API_ENDPOINT = {
     add: '/add',
     update: '/:id',        // Đường dẫn cập nhật người dùng theo ID
     delete: '/:id',        // Đường dẫn xóa người dùng theo ID
+  },
+  cart: {
+    base: API_BASE_URL + '/api' + '/carts',  // Ví dụ URL cho cart
+    list: '/list',
+    add: '/add',
+    delete: '/delete',
+    update: '/update',
   }
 };

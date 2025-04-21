@@ -14,6 +14,7 @@ import {AppOrdersComponent} from './order/order.component';
 import {EditOrderComponent} from './edit-order/edit-order.component';
 import {ProductComponent} from './product/product.component';
 
+
 export const UiComponentsRoutes: Routes = [
   {
     path: '',
