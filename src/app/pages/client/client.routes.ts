@@ -33,7 +33,7 @@ export const ClientRoutes: Routes = [
         component: ProductDetailComponent, // Component hiển thị chi tiết sản phẩm
       },
       {
-        path: 'cart',
+        path: 'carts',
         component: CartComponent
       },
     ],
