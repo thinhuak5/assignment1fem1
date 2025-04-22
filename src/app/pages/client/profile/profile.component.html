@@ -1,0 +1,58 @@
+<app-header></app-header>
+<mat-card class="cardWithShadow">
+  <mat-card-content>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <!-- Tiêu đề (hiển thị tùy chế độ) -->
+
+
+      <!-- Tên người dùng -->
+      <mat-form-field appearance="outline" class="w-100 mb-4">
+        <mat-label>Tên người dùng</mat-label>
+        <input matInput formControlName="name" placeholder="Nhập tên người dùng"/>
+        <mat-error *ngIf="form.get('name')?.hasError('required')">Tên là bắt buộc</mat-error>
+      </mat-form-field>
+
+      <!-- Email -->
+      <mat-form-field appearance="outline" class="w-100 mb-4">
+        <mat-label>Email</mat-label>
+        <input matInput formControlName="email" placeholder="Nhập email"/>
+        <mat-error *ngIf="form.get('email')?.hasError('required')">Email là bắt buộc</mat-error>
+        <mat-error *ngIf="form.get('email')?.hasError('email')">Email không hợp lệ</mat-error>
+      </mat-form-field>
+
+      <!-- Số điện thoại -->
+      <mat-form-field appearance="outline" class="w-100 mb-4">
+        <mat-label>Số điện thoại</mat-label>
+        <input matInput formControlName="phone" placeholder="Nhập số điện thoại"/>
+        <mat-error *ngIf="form.get('phone')?.hasError('required')">Số điện thoại là bắt buộc</mat-error>
+      </mat-form-field>
+
+      <!-- Upload ảnh -->
+      <div class="mb-3">
+        <label for="file">Chọn ảnh người dùng:</label>
+        <input type="file" id="file" (change)="onFileSelected($event)"/>
+      </div>
+
+      <!-- Xem trước ảnh -->
+      <div *ngIf="form.get('avatar')?.value" class="mb-3">
+        <p>Ảnh xem trước:</p>
+        <img [src]="form.get('avatar')?.value" alt="Preview" width="200" class="rounded"/>
+      </div>
+
+      <!-- URL ảnh -->
+      <mat-form-field appearance="outline" class="w-100 mb-4">
+        <mat-label>URL ảnh người dùng</mat-label>
+        <input matInput formControlName="avatar" placeholder="Nhập URL ảnh"/>
+      </mat-form-field>
+
+      <!-- Nút hành động -->
+      <button mat-raised-button color="primary" type="submit" [disabled]="!form.valid">
+        Cập nhật
+      </button>
+      <button type="button" mat-stroked-button color="primary" [routerLink]="['/ui-components/user']">
+        Quay lại
+      </button>
+    </form>
+  </mat-card-content>
+</mat-card>
+<app-footer></app-footer>

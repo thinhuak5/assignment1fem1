@@ -54,7 +54,7 @@ export class AppSideLoginComponent implements OnInit {
           try {
             const decoded: any = jwtDecode(token);
             const role = decoded.role;
-
+            localStorage.setItem('userId', decoded.id?.toString() ?? '');
             localStorage.setItem('userName', decoded.name || '');
             localStorage.setItem('userAvatar', decoded.avatar || '');
 

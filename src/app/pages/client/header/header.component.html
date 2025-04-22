@@ -20,7 +20,7 @@
               <span>{{ userName }}</span>
             </div>
             <ul class="dropdown-menu show" *ngIf="showMenu">
-              <li><a class="dropdown-item" routerLink="/profile">Xem tài khoản</a></li>
+                <li><a class="dropdown-item" routerLink="/profile/:id">Xem tài khoản</a></li>
               <li>
                 <button class="dropdown-item" (click)="logout()">Đăng xuất</button>
               </li>
