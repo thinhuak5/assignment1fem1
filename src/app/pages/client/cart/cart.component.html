@@ -1,4 +1,4 @@
-<div class="container my-4">
+<!-- <div class="container my-4">
   <h2>Giỏ hàng của bạn</h2>
   <div *ngIf="cartItems.length === 0">
     <p>Giỏ hàng của bạn đang trống.</p>
@@ -16,4 +16,106 @@
       </div>
     </div>
   </div>
+</div> -->
+
+<!-- Import Header -->
+<app-header></app-header>
+
+<div class="container my-4">
+    <h2>Giỏ hàng của bạn</h2>
+
+    <div class="table-responsive">
+        <table class="table table-bordered align-middle text-center">
+            <thead class="table-light">
+            <tr>
+                <th>Hình ảnh</th>
+                <th>Tên sản phẩm</th>
+                <th>Mô tả</th>
+                <th>Giá</th>
+                <th>Số lượng</th>
+                <th>Thành tiền</th>
+                <th>Xóa</th>
+            </tr>
+            </thead>
+            <tbody>
+            <!-- Sản phẩm 1 -->
+            <tr>
+                <td>
+                    <img src="https://cdn.example.com/sua-vinamilk.jpg" alt="Sữa Vinamilk" width="80">
+                </td>
+                <td>Sữa Tươi Vinamilk</td>
+                <td>Sữa tươi tiệt trùng không đường, hộp 1L</td>
+                <td>30,000 VNĐ</td>
+                <td>
+                    <div class="d-flex justify-content-center align-items-center">
+                        <button class="btn btn-sm btn-secondary me-2">-</button>
+                        <span>2</span>
+                        <button class="btn btn-sm btn-secondary ms-2">+</button>
+                    </div>
+                </td>
+                <td>60,000 VNĐ</td>
+                <td>
+                    <button class="btn btn-sm btn-danger">Xóa</button>
+                </td>
+            </tr>
+
+            <!-- Sản phẩm 2 -->
+            <tr>
+                <td>
+                    <img src="https://cdn.example.com/oreo.jpg" alt="Bánh Oreo" width="80">
+                </td>
+                <td>Bánh Oreo Socola</td>
+                <td>Bánh quy kẹp kem socola 133g</td>
+                <td>15,000 VNĐ</td>
+                <td>
+                    <div class="d-flex justify-content-center align-items-center">
+                        <button class="btn btn-sm btn-secondary me-2">-</button>
+                        <span>1</span>
+                        <button class="btn btn-sm btn-secondary ms-2">+</button>
+                    </div>
+                </td>
+                <td>15,000 VNĐ</td>
+                <td>
+                    <button class="btn btn-sm btn-danger">Xóa</button>
+                </td>
+            </tr>
+
+            <!-- Sản phẩm 3 -->
+            <tr>
+                <td>
+                    <img src="https://cdn.example.com/haohao.jpg" alt="Mì Hảo Hảo" width="80">
+                </td>
+                <td>Mì Hảo Hảo</td>
+                <td>Tôm chua cay, gói 75g</td>
+                <td>4,000 VNĐ</td>
+                <td>
+                    <div class="d-flex justify-content-center align-items-center">
+                        <button class="btn btn-sm btn-secondary me-2">-</button>
+                        <span>5</span>
+                        <button class="btn btn-sm btn-secondary ms-2">+</button>
+                    </div>
+                </td>
+                <td>20,000 VNĐ</td>
+                <td>
+                    <button class="btn btn-sm btn-danger">Xóa</button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Tổng tiền + Thanh toán -->
+    <div class="row pt-3 mt-4 border-top">
+        <div class="col-md-8">
+            <h4>Tổng cộng: <span class="text-danger">95,000 VNĐ</span></h4>
+        </div>
+        <div class="col-md-4 text-end">
+            <button class="btn btn-success btn-lg" [routerLink]="'/order'">Thanh toán</button>
+        </div>
+
+    </div>
 </div>
+
+
+<!-- Import Footer -->
+<app-footer></app-footer>

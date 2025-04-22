@@ -6,6 +6,7 @@ import {AppSideRegisterComponent} from "../authentication/side-register/side-reg
 
 import {ProductDetailComponent} from './product/detail/detail.component';
 import {CartComponent} from "./cart/cart.component";
+import {OrderComponent} from "./order/order.component";
 
 
 export const ClientRoutes: Routes = [
@@ -36,6 +37,10 @@ export const ClientRoutes: Routes = [
         path: 'carts',
         component: CartComponent
       },
+      {
+        path: 'order',
+        component: OrderComponent
+      }
     ],
   },
 ];
