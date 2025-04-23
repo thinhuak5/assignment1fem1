@@ -46,8 +46,8 @@ export class ProductComponent {
     this.productService.getProducts().subscribe({
       next: (res: any) => {
         console.log('API Response:', res); // Kiểm tra dữ liệu trả về
-        this.list = res?.data ?? res; // Gán dữ liệu vào `list`
-        console.log('List:', this.list); // Kiểm tra dữ liệu được gán vào `list`
+        this.list = res?.data ?? res;
+        console.log('List:', this.list);
       },
       error: (err) => {
         console.error('Error fetching products:', err);
