@@ -1,14 +1,14 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, Router, RouterModule} from '@angular/router'; // To fetch product ID from the URL
+import {ActivatedRoute, Router, RouterModule} from '@angular/router';
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {ProductsService} from 'src/app/services/apis/product.service';
 import {MatInputModule} from '@angular/material/input';
 import {MatCardModule} from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button';
 import {MatSelectModule} from '@angular/material/select';
-import {CloudinaryService} from '../../../../services/common/cloudinary.service'; // Service for image upload
+import {CloudinaryService} from '../../../../services/common/cloudinary.service';
 import {CommonModule} from '@angular/common';
-import {IProduct} from 'src/app/interface/product.interface'; // Import the Product interface
+import {IProduct} from 'src/app/interface/product.interface';
 
 @Component({
   selector: 'app-edit-product',
@@ -26,14 +26,14 @@ import {IProduct} from 'src/app/interface/product.interface'; // Import the Prod
 })
 export class EditProductComponent implements OnInit {
   form: FormGroup;
-  productId: string; // Store the ID of the product being edited
+  productId: string;
 
   constructor(
     private fb: FormBuilder,
-    private productService: ProductsService, // Product service
+    private productService: ProductsService,
     public router: Router,
-    private cloudinary: CloudinaryService, // Cloudinary service for image upload
-    private route: ActivatedRoute // To access route params (product ID)
+    private cloudinary: CloudinaryService,
+    private route: ActivatedRoute
   ) {
     this.form = this.fb.group({
       name: ['', Validators.required],
@@ -47,14 +47,11 @@ export class EditProductComponent implements OnInit {
   }
 
   ngOnInit() {
-    // Get product ID from the route
     this.productId = this.route.snapshot.paramMap.get('id') || '';
 
     if (this.productId) {
-      // If a product ID exists, fetch the product details
-      this.productService['getProductsById'](this.productId).subscribe(
+      this.productService.getProductById(Number(this.productId)).subscribe(
         (product: IProduct) => {
-          // Fill the form with the existing product data
           this.form.patchValue({
             name: product.name,
             images: product.images,
@@ -64,6 +61,10 @@ export class EditProductComponent implements OnInit {
             description: product.description,
             category_id: product.category_id
           });
+        },
+        (error) => {
+          console.error('Lỗi khi lấy sản phẩm:', error);
+          alert('Không tìm thấy sản phẩm!');
         }
       );
     }
@@ -72,9 +73,8 @@ export class EditProductComponent implements OnInit {
   onFileSelected(event: any) {
     const file = event.target.files[0];
     if (file) {
-      // Upload image to Cloudinary
       this.cloudinary.uploadImage(file).subscribe((res: any) => {
-        this.form.get('images')?.setValue(res.secure_url); // Update form with image URL
+        this.form.get('images')?.setValue(res.secure_url);
       });
     }
   }
@@ -82,14 +82,13 @@ export class EditProductComponent implements OnInit {
   onSubmit() {
     if (this.form.invalid) return;
 
-    const id = Number(this.productId); // Chuyển đổi productId thành number
+    const id = Number(this.productId);
 
     if (this.productId) {
-      // If productId exists, update the existing product
       this.productService.updateProducts(id, this.form.value).subscribe({
         next: () => {
           alert('Cập nhật sản phẩm thành công!');
-          this.router.navigate(['/ui-components/products']); // Redirect to product list
+          this.router.navigate(['/ui-components/products']);
         },
         error: (err) => {
           console.error('Cập nhật sản phẩm thất bại:', err);
@@ -97,11 +96,10 @@ export class EditProductComponent implements OnInit {
         },
       });
     } else {
-      // If productId does not exist, create a new product
       this.productService.createProducts(this.form.value).subscribe({
         next: () => {
           alert('Thêm sản phẩm thành công!');
-          this.router.navigate(['/ui-components/products']); // Redirect to product list
+          this.router.navigate(['/ui-components/products']);
         },
         error: (err) => {
           console.error('Thêm sản phẩm thất bại:', err);
