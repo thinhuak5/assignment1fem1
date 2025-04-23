@@ -29,10 +29,11 @@ export const API_ENDPOINT = {
     delete: '/:id',        // Đường dẫn xóa người dùng theo ID
   },
   cart: {
-    base: API_BASE_URL + '/api' + '/carts',  // Ví dụ URL cho cart
-    list: '/list',
-    add: '/add',
-    delete: '/delete',
-    update: '/update',
+    base: API_BASE_URL + '/api' + '/carts',  // URL base
+    list: '',  // Đã có /carts là đủ
+    add: '',   // Đã có /carts là đủ (dùng POST /carts)
+    delete: '/:product_id',  // Cập nhật route xoá theo ID sản phẩm
+    update: '/:product_id',  // Cập nhật số lượng sản phẩm theo ID
   }
+
 };

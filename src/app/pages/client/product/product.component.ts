@@ -41,22 +41,22 @@ export class ProductComponent {
   }
 
   // Thêm vào giỏ hàng
-// product.component.ts
-  addToCart(productId: number) {
-    const quantity = 1; // Hoặc lấy giá trị quantity từ đâu đó nếu muốn
-    const userId = 1; // Lấy user_id từ session hoặc từ thông tin người dùng
-    const price = 100; // Lấy giá từ sản phẩm hoặc từ thông tin liên quan
+  addToCart(product: any): void {
+    const userId = Number(localStorage.getItem('userId'));
+    const quantity = 1;
+    const price = product.price;
 
-    this.cartService.addToCart(productId, quantity, userId, price).subscribe({
-      next: () => {
-        this.router.navigate(['/cart']);
+    this.cartService.addToCart(product.id, quantity, userId, price).subscribe({
+      next: (res) => {
+        console.log('Đã thêm vào giỏ hàng:', res);
+        alert('Sản phẩm đã được thêm vào giỏ hàng!');
+        // Hiển thị toast hoặc thông báo nếu muốn
       },
-      error: (err: any) => {
-        console.error('Lỗi khi thêm sản phẩm vào giỏ:', err);
+      error: (err) => {
+        console.error('Lỗi thêm vào giỏ hàng:', err);
       }
     });
   }
-
 
 
 }

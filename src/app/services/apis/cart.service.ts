@@ -14,12 +14,13 @@ export class CartService extends ApiService {
     super(_http);
   }
 
-  getCartItems(): Observable<ICart[]> {
-    return this.get<ICart[]>(API_ENDPOINT.cart.base + API_ENDPOINT.cart.list);
+  getCartItems(id: number): Observable<ICart[]> {
+    return this.get<ICart[]>(API_ENDPOINT.cart.base + '/' + id);  // Không cần thêm /user/:userId nữa
   }
 
   // cart.service.ts
-// cart.service.ts
+
+
   addToCart(productId: number, quantity: number, userId: number, price: number): Observable<ICart> {
     const url = API_ENDPOINT.cart.base;  // Đổi thành /carts (Không cần /add nữa)
     return this.post<ICart>(url, {
@@ -32,16 +33,15 @@ export class CartService extends ApiService {
   }
 
 
-  removeFromCart(id: number): Observable<any> {
-    return this.delete(API_ENDPOINT.cart.base + API_ENDPOINT.cart.delete + '/' + id);
-  }
-
-  updateCartItem(id: number, data: Partial<ICart>): Observable<Partial<ICart>> {
-    return this.put<Partial<ICart>>(API_ENDPOINT.cart.base + API_ENDPOINT.cart.update + '/' + id, data);
+  removeFromCart(productId: number): Observable<any> {
+    const userId = localStorage.getItem('userId');
+    return this._http.delete(`${API_ENDPOINT.cart.base}/${productId}?user_id=${userId}`);
   }
 
 
-  getCartByUser(userId: number): Observable<ICart[]> {
-    return this.get<ICart[]>(`${API_ENDPOINT.cart.base}/user/${userId}`);
+  updateCartItem(productId: number, data: Partial<ICart>): Observable<Partial<ICart>> {
+    const url = API_ENDPOINT.cart.base + API_ENDPOINT.cart.update.replace(':product_id', productId.toString());
+    return this.put<Partial<ICart>>(url, data);
   }
+
 }
