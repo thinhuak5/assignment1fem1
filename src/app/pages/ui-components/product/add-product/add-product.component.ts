@@ -6,8 +6,9 @@ import {MatInputModule} from '@angular/material/input';
 import {MatCardModule} from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button';
 import {MatSelectModule} from '@angular/material/select';
-import {CloudinaryService} from '../../../../services/common/cloudinary.service'; // Dịch vụ upload hình ảnh
+import {CloudinaryService} from '../../../../services/common/cloudinary.service';
 import {CommonModule} from '@angular/common';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-add-product',
@@ -18,6 +19,7 @@ import {CommonModule} from '@angular/common';
     MatCardModule,
     MatButtonModule,
     MatSelectModule,
+    MatProgressSpinnerModule,
     ReactiveFormsModule,
     CommonModule,
   ],
@@ -25,52 +27,66 @@ import {CommonModule} from '@angular/common';
 })
 export class AddProductComponent {
   form: FormGroup;
+  isLoading = false;
 
   constructor(
     private fb: FormBuilder,
-    private productService: ProductsService, // Sử dụng dịch vụ sản phẩm
-    public router: Router,  // Chuyển từ private sang public để sử dụng trong template
-    private cloudinary: CloudinaryService // Sử dụng dịch vụ Cloudinary cho việc upload hình ảnh
+    private productService: ProductsService,
+    public router: Router,
+    private cloudinary: CloudinaryService
   ) {
     this.form = this.fb.group({
       name: ['', Validators.required],
       images: ['', Validators.required],
-      price: [0, [Validators.required, Validators.min(0)]],
-      discount_price: [0, [Validators.min(0)]],
-      status: [Validators.required],
-      description: [''], // Mô tả sản phẩm
+      price: ['', [Validators.required, Validators.min(0)]],
+      discount_price: ['', [Validators.min(0)]],
+      status: ['', Validators.required],
+      description: [''],
       short_description: [''],
-      category_id: [null, Validators.required], // Mã danh mục
+      category_id: [null, Validators.required],
     });
   }
 
-  // Đổi tên thành onFileSelected
-  onFileSelected(event: any) {
-    const file = event.target.files[0];
+  isFieldInvalid(field: string): boolean {
+    const control = this.form.get(field);
+    return !!(control && control.invalid && (control.dirty || control.touched));
+  }
+
+  onFileSelected(event: Event) {
+    const target = event.target as HTMLInputElement;
+    const file = target.files?.[0];
     if (file) {
-      // Upload hình ảnh lên Cloudinary
+      this.isLoading = true;
       this.cloudinary.uploadImage(file).subscribe({
         next: (res: any) => {
-          this.form.get('images')?.setValue(res.secure_url); // Cập nhật URL hình ảnh vào form
+          this.form.get('images')?.setValue(res.secure_url);
+          this.isLoading = false;
         },
         error: (err) => {
           console.error('Lỗi khi tải hình ảnh:', err);
           alert('Lỗi khi tải hình ảnh lên Cloudinary.');
+          this.isLoading = false;
         }
       });
     }
   }
 
   onSubmit() {
-    if (this.form.invalid) return;
+    if (this.form.invalid) {
+      this.form.markAllAsTouched();
+      return;
+    }
 
+    this.isLoading = true;
     this.productService.createProducts(this.form.value).subscribe({
       next: () => {
         alert('Thêm sản phẩm thành công!');
-        this.router.navigate(['/ui-components/products']); // Điều hướng về trang danh sách sản phẩm
+        this.isLoading = false;
+        this.router.navigate(['/ui-components/products']);
       },
       error: (err) => {
         console.error('Thêm sản phẩm thất bại:', err);
+        this.isLoading = false;
         if (err.status === 500) {
           alert('Lỗi server: Không thể thêm sản phẩm. Vui lòng thử lại sau.');
         } else {

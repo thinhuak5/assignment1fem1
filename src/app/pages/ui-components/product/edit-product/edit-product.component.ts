@@ -80,10 +80,13 @@ export class EditProductComponent implements OnInit {
   }
 
   onSubmit() {
-    if (this.form.invalid) return;
-
+    if (this.form.invalid) {
+      this.form.markAllAsTouched(); // Bắt buộc hiện lỗi tất cả ô input
+      return;
+    }
+  
     const id = Number(this.productId);
-
+  
     if (this.productId) {
       this.productService.updateProducts(id, this.form.value).subscribe({
         next: () => {
@@ -108,4 +111,5 @@ export class EditProductComponent implements OnInit {
       });
     }
   }
+  
 }
